@@ -11,7 +11,7 @@
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
     <img class="mx-auto h-10 w-auto" src="../storage/gundam.png" alt="Your Company">
-
+ <p> tesy </p>
     <h1 class="mt-10 text-center text-2xl font-bold leading-5 tracking-tight">Welcome your Connect-It!</h>
     <h3 class="mt-10 text-center text-1xl font-bold leading-5 tracking-tight">Sign in to your account</h3>
   </div>
