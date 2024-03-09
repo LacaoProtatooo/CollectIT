@@ -10,15 +10,24 @@ export default {
       themes: [
         {
           mytheme: {
-          "primary": "#00a5ff",        
-          "secondary": "#aabece",       
-          "accent": "#dd3e46",         
-          "neutral": "#001e25",         
-          "base-100": "#003d4b",        
-          "info": "#10a7ff",         
-          "success": "#00f871",       
-          "warning": "#ffd782",        
-          "error": "#ff4646",
+          
+ "primary": "#307CBF",
+          
+ "secondary": "#0600ff",
+          
+ "accent": "#D77C45",
+          
+ "neutral": "#232630",
+          
+ "base-100": "#F2F2F2",
+          
+ "info": "#007ae8",
+          
+ "success": "#99C67F",
+          
+ "warning": "#F2CA7E",
+          
+ "error": "#D9414E",
           },
         },
       ],
