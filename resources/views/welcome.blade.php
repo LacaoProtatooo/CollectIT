@@ -15,7 +15,7 @@ body {
 </style>
     <body class=" items-center">
     <div class="flex min-h-full flex-col justify-center px-60 py-10 lg:px-8 items-center">
-    <div class="card bg-stone-200 shadow-xl py-3 px-3 ">
+    <div class="card bg-stone-200 shadow-xl py-3 px-3 shadow-xl glass">
     <div class="carousel w-full border-r-2">
   <div id="slide1" class="carousel-item relative w-full">
     <img src="../storage/hotwheelsbg.jpg" class="w-full content-stretch" />
