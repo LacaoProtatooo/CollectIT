@@ -9,9 +9,10 @@
 </head>
 <body>
 
-<div class="navbar bg-slate-900">
+<div class="navbar bg-stone-200">
+<img class="mx-auto w-20" src="../storage/gundam.png" alt="Collect-It">
   <div class="flex-1">
-    <a class="btn btn-ghost text-xl text-primary">Connect-It</a>
+    <a class="btn btn-ghost text-center font-bold text-3xl text-primary font-helvetica">Connect-It</a>
   </div>
   <div class="flex-none flex gap-2">
     <div class="form-control">
