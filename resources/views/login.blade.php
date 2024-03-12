@@ -22,7 +22,7 @@ body {
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                 <img class="mx-auto w-20" src="../storage/gundam.png" alt="Collect-It">
                 <h1 class="mt-10 text-center font-bold text-3xl text-primary font-helvetica">Welcome to <br> Connect-It!</h1>
-                <h3 class="mt-10 text-center text-1xl tracking-tight text-white">Sign in to your account</h3>
+                <h3 class="mt-10 text-center text-1xl tracking-tight text-white font-helvetica-neue">Sign in to your account</h3>
             </div>
 
             <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
