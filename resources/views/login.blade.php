@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite('resources/css/app.css')
-    <title>Login</title>
-    <style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        @vite('resources/css/app.css')
+        <title>Login</title>
+        <style>
 body {
-  background-image: url('../storage/bg.png');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
+    background-image: url('../storage/bg.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 </style>
 </head>
 <body>
 <div class="flex min-h-full flex-col justify-center px-60 py-12 lg:px-8 items-center">
-    <div class="card w-96 bg-base-100 shadow-xl image-full justify-center">
+        <div class="card w-96 bg-base-100 shadow-xl image-full justify-center">
         <figure><img src="../storage/wallpaper.jpg" alt="bg" /></figure>
         <div class="card-body">
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
