@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Login;
 use App\Http\Controllers\UserController;
 
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -20,18 +21,19 @@ class LoginController extends Controller
     }
 
     public function login(Request $request){
-        $credentials = $request->only('email', 'password');
 
+        $credentials = $request->only('username', 'password');
         if (Auth::attempt($credentials)){
             $request->session()->regenerate();
             $user = auth()->user();
-
+    
             return redirect()->route('user.home');
-
+    
         } else {
-            return back()->withErrors(['email' => 'Invalid credentials']);
+            return back()->withErrors(['credentials' => 'Invalid username or password']);
         }
     }
+    
 
     public function logout(Request $request){
         Auth::logout();

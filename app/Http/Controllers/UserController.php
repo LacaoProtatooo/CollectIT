@@ -38,11 +38,13 @@ class UserController extends Controller
             'birthdate' => $birthdate,
         ]);
 
+        $passhash = Hash::make($request->password);
+
         // Save Login
         Login::create([
             'user_id' => $user->id,
             'username' => $request->username,
-            'password' => Hash::make($request->password),
+            'password' => $passhash
         ]);
 
         return redirect()->route('login.loginpage')->with('successregister', true);

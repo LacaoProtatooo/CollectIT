@@ -24,9 +24,9 @@
                     <form class="space-y-6" action="{{ route('login.submit') }}" method="POST">
                     @csrf
                         <div>
-                            <label for="email" class="block text-sm font-medium leading-6 text-info ">Email address</label>
+                            <label for="username" class="block text-sm font-medium leading-6 text-info ">Username</label>
                             <div class="mt-2">
-                                <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 px-2 bg-neutral-100 text-stone-900">
+                                <input id="username" name="username" type="username" autocomplete="username" required class="block w-full rounded-md border-0 py-1.5 px-2 bg-neutral-100 text-stone-900">
                             </div>
                         </div>
     

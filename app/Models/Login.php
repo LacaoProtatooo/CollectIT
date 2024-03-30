@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
 class Login extends Model
@@ -12,6 +13,9 @@ class Login extends Model
         'username',
         'password'
     ];
+
+    protected $primaryKey = 'user_id';
+    public $incrementing = false;
 
     public function users()
     {
