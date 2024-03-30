@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('title');
             $table->string('details');
             $table->double('discount_rate');
-            // $table->unsignedBigInteger('');
             $table->timestamps();
         });
     }
