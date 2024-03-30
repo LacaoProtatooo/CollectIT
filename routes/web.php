@@ -18,13 +18,13 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function () {
-    return view('login');
+    return view('login.login');
 });
 
 Route::get('/register', function () {
-    return view('register');
+    return view('login.register');
 });
 
 Route::get('/profile', function () {
-    return view('profile');
+    return view('user.profile');
 });
