@@ -18,10 +18,37 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'phone_number',
         'email',
-        'password',
+        'address',
+        'role',
+            'birthdate',
+            'image_path',
+
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function collectibles()
+    {
+        return $this->hasMany(Collectible::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function logins()
+    {
+        return $this->hasOne(Login::class);
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -29,7 +56,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
+
         'remember_token',
     ];
 

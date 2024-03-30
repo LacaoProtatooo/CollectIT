@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('collectible_has_tags', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('reviews', function (Blueprint $table) {
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 
@@ -22,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('collectible_has_tags');
+        Schema::table('reviews', function (Blueprint $table) {
+            $table->dropColumn('order_id');
+        });
     }
 };

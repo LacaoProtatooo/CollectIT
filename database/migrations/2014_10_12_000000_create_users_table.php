@@ -18,11 +18,10 @@ return new class extends Migration
             $table->string('phone_number');
             $table->string('email');
             $table->string('address');
+            $table->string('role');
             $table->date('birthdate');
             $table->string('image_path');
             $table->timestamp('created_at')->nullable();
-            $table->unsignedBigInteger('role_id')->index();
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
     }
 

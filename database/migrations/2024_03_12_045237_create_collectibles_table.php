@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('collectibles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->index();
-            $table->foreign('user_id')->refrences('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('name');
             $table->string('description');
             $table->decimal('price', 11, 2);
             $table->string('dimension');
             $table->string('condition');
-            $table->int('stock');
+            $table->integer('stock');
             $table->string('manufacturer');
             $table->string('category');
             $table->string('image_path');

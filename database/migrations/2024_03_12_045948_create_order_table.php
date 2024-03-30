@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order', function (Blueprint $table) {
-            $table->id()-autoIncrement();
+        Schema::create('orders', function (Blueprint $table) {
+            $table->id()->autoIncrement();
             $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->unsignedBigInteger('');
+            $table->string('ship_type');
+            $table->string('status');
+            $table->date('date');
             $table->timestamps();
         });
     }

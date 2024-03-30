@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bidding', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('orders', function (Blueprint $table) {
+            $table->unsignedBigInteger('courier_id');
+            $table->foreign('courier_id')->references('id')->on('couriers')->onDelete('cascade');
         });
     }
 
@@ -22,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bidding');
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropColumn('courier_id');
+        });
     }
 };
