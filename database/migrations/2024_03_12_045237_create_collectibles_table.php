@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('collectibles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('name');
             $table->string('description');
             $table->decimal('price', 11, 2);
@@ -26,6 +25,8 @@ return new class extends Migration
             $table->string('image_path');
             $table->date('release_date');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

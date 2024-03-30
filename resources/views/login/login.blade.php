@@ -21,7 +21,8 @@
                 </div>
     
                 <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form class="space-y-6" action="#" method="POST">
+                    <form class="space-y-6" action="{{ route('login.submit') }}" method="POST">
+                    @csrf
                         <div>
                             <label for="email" class="block text-sm font-medium leading-6 text-info ">Email address</label>
                             <div class="mt-2">
@@ -45,7 +46,7 @@
     
                     <p class="mt-10 text-center text-sm text-white">
                         not a member?
-                        <a href="{{url('register')}}" class="font-semibold leading-6 text-info hover:text-indigo-500">sign up now</a>
+                        <a href="{{ route('signup.show') }}" class="font-semibold leading-6 text-info hover:text-indigo-500">Sign up now</a>
                     </p>
                 </div>
                 <div class="card-actions justify-end">

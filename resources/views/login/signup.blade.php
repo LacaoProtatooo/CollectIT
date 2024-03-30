@@ -21,7 +21,8 @@
             </div>
 
             <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form class="space-y-6" action="#" method="POST">
+                <form class="space-y-6" action="{{ route('signup.submit') }}" method="POST">
+                @csrf
                     <div>
                         <label for="email" class="block text-sm font-medium leading-6 text-info">Email address</label>
                         <div class="mt-2">
@@ -73,14 +74,33 @@
                     </div>
 
                     <div>
+                        <label for="phone_number" class="block text-sm font-medium leading-6 text-info">Phone Number</label>
+                        <div class="mt-2">
+                            <input id="phone_number" name="phone_number" type="text" autocomplete="tel" required
+                                   class="block w-full rounded-md border-0 py-1.5 px-2 bg-neutral-100 text-stone-900">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="address" class="block text-sm font-medium leading-6 text-info">Address</label>
+                        <div class="mt-2">
+                            <input id="address" name="address" type="text" autocomplete="address-line1" required
+                                   class="block w-full rounded-md border-0 py-1.5 px-2 bg-neutral-100 text-stone-900">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="birthdate" class="block text-sm font-medium leading-6 text-info">Birthdate</label>
+                        <div class="mt-2">
+                            <input id="birthdate" name="birthdate" type="date" required
+                                   class="block w-full rounded-md border-0 py-1.5 px-2 bg-neutral-100 text-stone-900">
+                        </div>
+                    </div>
+
+                    <div>
                         <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Register</button>
                     </div>
                 </form>
-
-                <p class="mt-10 text-center text-sm text-white">
-                    Already have an account?
-                    <a href="{{url('login')}}" class="font-semibold leading-6 text-info hover:text-indigo-500">Login now</a>
-                </p>
             </div>
             <div class="card-actions justify-end">
             </div>
