@@ -49,19 +49,19 @@ class UserController extends Controller
         $user = Auth::user();
         $collectibles = Collectible::where('user_id', $user->id)->get();
 
-        if($data->ajax())
-        {
-            $re = Collectible::select('*');
-            return DataTables::of($re)
-            ->addIndexColumn()
-            ->addColumn('action', function($row){
-                $actionbtn = '  <a href ="javascript::void(0)" class = "edit btn btn-success btn-sm">Edit</a>
-                                <a href = "javascript::void(0)" class = "delete btn btn-danger btn-sm">Delete</a>';
-                                return $actionbtn;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
-        }
+        // if($data->ajax())
+        // {
+        //     $re = Collectible::select('*');
+        //     return DataTables::of($re)
+        //     ->addIndexColumn()
+        //     ->addColumn('action', function($row){
+        //         $actionbtn = '  <a href ="javascript::void(0)" class = "edit btn btn-success btn-sm">Edit</a>
+        //                         <a href = "javascript::void(0)" class = "delete btn btn-danger btn-sm">Delete</a>';
+        //                         return $actionbtn;
+        //     })
+        //     ->rawColumns(['action'])
+        //     ->make(true);
+        // }
 
         return view('user.collectibles', compact('collectibles'));
     }
