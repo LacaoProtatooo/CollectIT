@@ -20,6 +20,7 @@ use App\Http\Controllers\CollectibleController;
 
 Route::get('/', [CollectibleController::class, 'populate'])->name('home');
 Route::get('/welcome', function () { return view('home.welcome'); })->name('welcome');
+Route::get('/cart', function () { return view('user.cart'); })->name('cart');
 
 // LOGIN =======================================================================
 Route::get('/login', [LoginController::class, 'loginpage'])->name('login.loginpage');
