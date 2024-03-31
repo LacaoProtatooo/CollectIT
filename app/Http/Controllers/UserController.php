@@ -44,14 +44,6 @@ class UserController extends Controller
         return redirect()->route('login.loginpage')->with('successregister', true);
     }
 
-
-    public function collectibles(){
-        $user = Auth::user();
-        $collectibles = Collectible::where('user_id', $user->id)->get();
-
-        return view('user.collectibles', compact('collectibles'));
-    }
-
     public function profile(){
         $user = Auth::user();
         $userinfo = User::where('id', $user->id)->first();

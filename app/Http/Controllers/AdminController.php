@@ -34,4 +34,8 @@ class AdminController extends Controller
 
 
     }
+
+    public function events(){
+        
+    }
 }
