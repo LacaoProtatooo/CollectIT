@@ -32,10 +32,6 @@ class AdminController extends Controller
     public function details($id){
         $collectible = Collectible::find($id);
 
-
     }
 
-    public function events(){
-        
-    }
 }
