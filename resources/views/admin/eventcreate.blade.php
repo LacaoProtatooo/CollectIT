@@ -9,7 +9,7 @@
 </head>
 <body class="bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200">
     @include('common.message') 
-    @include('common.header')
+    @include('common.adminheader')
     <br><br>
 
     <div class="">

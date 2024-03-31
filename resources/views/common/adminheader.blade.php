@@ -3,10 +3,19 @@
         <img class="w-20 ml-4" src="../storage/gundam.png" alt="Collect-It">
         <a href="{{ auth()->check() && Auth::user()->role === 'admin' ? route('admin.home') : route('home') }}" class="btn btn-ghost text-center font-bold text-3xl text-info font-helvetica">Collect-It</a>
     </div>
-    <div class="flex items-center gap-4 justify-center"> <!-- Updated this line -->
-        <button type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-7 py-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Users</button>
-        <button type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-7 py-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Couriers</button>
-        <button type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-7 py-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Events</button>
+    <div class="flex items-center gap-4 justify-center">
+        <a href="" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-7 py-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+            Users
+        </a>
+        <a href="" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-7 py-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+            Orders
+        </a>
+        <a href="" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-7 py-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+            Couriers
+        </a>
+        <a href="{{ route('event.show')}}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-7 py-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+            Events
+        </a>
     </div>
     <div class="flex items-center gap-4">
         {{-- USER :: LOGGED IN USER --}}
