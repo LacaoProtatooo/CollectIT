@@ -10,7 +10,8 @@ class Event extends Model
     protected $fillable = [
         'title',
         'details',
-        'discount_rate'
+        'discount_rate',
+        'image_path'
     ];
 
     public function collectibles()

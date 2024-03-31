@@ -10,7 +10,8 @@ class Courier extends Model
     protected $fillable = [
         'name',
         'rates',
-        'type'
+        'type',
+        'image_path'
     ];
 
     public function orders()
