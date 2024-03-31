@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('email');
             $table->string('address');
             $table->string('role');
+            $table->string('username');
+            $table->string('password');
             $table->date('birthdate');
             $table->string('image_path')->nullable();
             $table->timestamps();
