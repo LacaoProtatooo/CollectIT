@@ -8,7 +8,7 @@ use App\Models\Collectible;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
+use Yajra\DataTables\Facades\DataTables;
 class UserController extends Controller
 {
 
@@ -45,9 +45,23 @@ class UserController extends Controller
     }
 
 
-    public function collectibles(){
+    public function collectibles(Request $data){
         $user = Auth::user();
         $collectibles = Collectible::where('user_id', $user->id)->get();
+
+        if($data->ajax())
+        {
+            $re = Collectible::select('*');
+            return DataTables::of($re)
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
+                $actionbtn = '  <a href ="javascript::void(0)" class = "edit btn btn-success btn-sm">Edit</a>
+                                <a href = "javascript::void(0)" class = "delete btn btn-danger btn-sm">Delete</a>';
+                                return $actionbtn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
 
         return view('user.collectibles', compact('collectibles'));
     }
@@ -59,5 +73,5 @@ class UserController extends Controller
         return view('user.profile', compact('user'));
     }
 
-    
+
 }

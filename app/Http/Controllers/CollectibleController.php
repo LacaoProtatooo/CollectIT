@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\CollectibleDataTable;
 use App\Models\Collectible;
 use App\Models\User;
 
@@ -11,7 +12,9 @@ use Illuminate\Support\Facades\Auth;
 class CollectibleController extends Controller
 {
     public function populate(){
-        $collectibles = Collectible::where('status','available')->get();   
+        $collectibles = Collectible::where('status','available')->get();
+        // dd($data->name);
+
 
         return view('home.home', compact('collectibles'));
     }
@@ -74,7 +77,7 @@ class CollectibleController extends Controller
 
     public function delete($id){
         Collectible::destroy($id);
-        
+
         return redirect()->route('collectibles.show');
     }
 
@@ -97,7 +100,7 @@ class CollectibleController extends Controller
             'release_date' => 'required',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif'
         ]);
-    
+
         // Image Handler
         $imagePaths = [];
         if ($request->hasFile('images')) {
@@ -107,7 +110,7 @@ class CollectibleController extends Controller
                 $imagePaths[] = 'storage/' . $filename;
             }
         }
-    
+
         $collectible = Collectible::create([
             'user_id' => $user->id,
             'name' => $request->name,
@@ -119,11 +122,11 @@ class CollectibleController extends Controller
             'manufacturer' => $request->manufacturer,
             'category' => $request->category,
             'release_date' => $request->release_date,
-            'image_path' => implode(',', $imagePaths) 
+            'image_path' => implode(',', $imagePaths)
         ]);
-    
+
         return redirect()->route('collectibles.show')->with('successcollectible', true);
     }
-    
+
 
 }
