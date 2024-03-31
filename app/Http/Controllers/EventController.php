@@ -51,7 +51,8 @@ class EventController extends Controller
     }
 
     public function delete($id){
-        Event::destroy($id);
+        $event = Event::findOrFail($id);
+        $event->delete();
         
         return redirect()->route('event.show');
     }

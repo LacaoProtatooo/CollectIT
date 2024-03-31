@@ -11,7 +11,7 @@
     <title>Edit</title>
     
 </head>
-<body>
+<body class="bg-gray-200">
     @include('common.adminheader')
 
     <div class="mt-4 mb-4">

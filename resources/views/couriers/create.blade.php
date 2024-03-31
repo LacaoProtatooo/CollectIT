@@ -11,8 +11,9 @@
     <title>Courier Create</title>
     
 </head>
-<body>
+<body class="bg-gray-200">
     @include('common.adminheader')
+    <br><br><br>
 
     <div class="mt-4 mb-4">
         <form action="{{route('courier.store')}}" method="POST" enctype="multipart/form-data" class="max-w-md mx-auto ">
@@ -101,6 +102,7 @@
         </form>
     </div>
 
+    <br><br><br>
     @include('common.footer')
 </body>
 </html>

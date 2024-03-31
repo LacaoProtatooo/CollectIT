@@ -56,7 +56,8 @@ class CourierController extends Controller
     }
 
     public function delete($id){
-        Courier::destroy($id);
+        $courier = Courier::findOrFail($id);
+        $courier->delete();
         
         return redirect()->route('courier.show');
     }

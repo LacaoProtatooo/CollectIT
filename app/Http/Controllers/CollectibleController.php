@@ -80,7 +80,8 @@ class CollectibleController extends Controller
 
 
     public function delete($id){
-        Collectible::destroy($id);
+        $collectible = Collectible::findOrFail($id);
+        $collectible->delete();
         
         return redirect()->route('collectibles.show');
     }

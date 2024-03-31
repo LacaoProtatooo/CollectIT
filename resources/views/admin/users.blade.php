@@ -7,7 +7,8 @@
     @vite(['resources/css/app.css','resources/js/app.js'])
     <title>Brokers</title>
 </head>
-<body class="bg-green-200">
+{{-- SIRA PA TO --}}
+<body class="bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800">
     @include('common.message')
     @include('common.adminheader')
 

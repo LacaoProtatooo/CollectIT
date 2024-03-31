@@ -11,10 +11,11 @@
     <title>Events Create</title>
     
 </head>
-<body>
+<body class="bg-gray-200">
     @include('common.adminheader')
+    <br><br><br>
 
-    <div class="mt-4 mb-4">
+    <div class="mt-4 mb-4 w-full items-center justify-center">
         <form action="{{route('event.store')}}" method="POST" enctype="multipart/form-data" class="max-w-md mx-auto ">
         @csrf
             <!-- Title -->
@@ -102,6 +103,7 @@
         </form>
     </div>
 
+    <br><br><br>
     @include('common.footer')
 </body>
 </html>
