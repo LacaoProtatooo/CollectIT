@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->double('rates');
             $table->string('type');
+            $table->longText('image_path')->nullable();
             $table->timestamps();
             $table->softDeletes();
             
