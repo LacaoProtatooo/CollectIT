@@ -26,14 +26,19 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)){
             $request->session()->regenerate();
             $user = auth()->user();
-    
-            return redirect()->route('user.home');
-    
+            if(Auth::user()->role === 'user')
+            {
+                return redirect()->route('home');
+            }
+            
+            Auth::logout();
+            return redirect()->route('home');
+
         } else {
             return back()->withErrors(['credentials' => 'Invalid username or password']);
         }
     }
-    
+
 
     public function logout(Request $request){
         Auth::logout();

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Login;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -25,6 +24,7 @@ class UserController extends Controller
         ]);
 
         $birthdate = date('Y-m-d', strtotime($request->birthdate));
+        $passhash = Hash::make($request->password);
 
         // Create new User
         $user = User::create([
@@ -36,16 +36,16 @@ class UserController extends Controller
             'address' => $request->address,
             'role' => 'user',
             'birthdate' => $birthdate,
-        ]);
-
-        $passhash = Hash::make($request->password);
-
-        // Save Login
-        Login::create([
-            'user_id' => $user->id,
-            'username' => $request->username,
             'password' => $passhash
         ]);
+
+
+        // Save Login
+        // Login::create([
+        //     'user_id' => $user->id,
+        //     'username' => $request->username,
+        //     'password' => $passhash
+        // ]);
 
         return redirect()->route('login.loginpage')->with('successregister', true);
     }

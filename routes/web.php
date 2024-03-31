@@ -16,8 +16,8 @@ use App\Http\Controllers\LoginController;
 */
 
 Route::get('/', function () {
-    return view('home.home');
-});
+    return view('user.home');
+})->name('home');
 
 // LOGIN ====================================================================
 Route::get('/login', [LoginController::class, 'loginpage'])->name('login.loginpage');
@@ -39,7 +39,7 @@ Route::post('/register/user', [LoginController::class, 'signupuser'])->name('sig
 // Route::middleware('user')->group(function () {
 
 
-    
+
 // });
 
 
