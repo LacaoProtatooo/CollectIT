@@ -17,12 +17,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->decimal('price', 11, 2);
-            $table->string('dimension');
+            $table->longText('dimension');
             $table->string('condition');
             $table->integer('stock');
             $table->string('manufacturer');
             $table->string('category');
-            $table->string('image_path');
+            $table->longText('image_path')->nullable();
             $table->date('release_date');
             $table->timestamps();
 

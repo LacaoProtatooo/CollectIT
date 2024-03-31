@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CollectibleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +17,9 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('user.home');
-})->name('home');
+Route::get('/', function () { return view('user.home'); })->name('home');
 
-// LOGIN ====================================================================
+// LOGIN =======================================================================
 Route::get('/login', [LoginController::class, 'loginpage'])->name('login.loginpage');
 Route::post('/', [LoginController::class, 'login'])->name('login.submit');
 Route::match(['get', 'post'], '/logout', [LoginController::class, 'logout'])->name('logout');
@@ -28,24 +28,26 @@ Route::match(['get', 'post'], '/logout', [LoginController::class, 'logout'])->na
 Route::get('/register', [LoginController::class, 'signup'])->name('signup.show');
 Route::post('/register/user', [LoginController::class, 'signupuser'])->name('signup.submit');
 
-// ADMIN
+// ADMIN =======================================================================
 // Route::middleware('admin')->group(function () {
 
 
 
 // });
 
-// USER
-// Route::middleware('user')->group(function () {
+// USER =========================================================================
+//Route::prefix('user')->middleware('user')->group(function () {
+    Route::get('/collectibles', [UserController::class, 'collectibles'])->name('collectibles.show');
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile.show');
+
+    // Collectible
+    Route::get('/collectible/create', [CollectibleController::class, 'create'])->name('collectible.create');
+    Route::post('/collectible/store', [CollectibleController::class, 'store'])->name('collectible.store');
+    Route::get('/collectible/{id}/edit', [CollectibleController::class, 'edit'])->name('collectible.edit');
+    Route::post('/collectible/{id}/update', [CollectibleController::class, 'update'])->name('collectible.update');
+    Route::get('/collectible/{id}/delete', [CollectibleController::class, 'delete'])->name('collectible.delete');
 
 
-
-// });
-
+//});
 
 
-
-
-Route::get('/profile', function () {
-    return view('user.profile');
-});

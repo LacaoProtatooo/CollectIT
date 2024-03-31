@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Collectible extends Model
 {
     protected $fillable = [
+        'user_id',
         'name',
         'description',
         'price',
@@ -16,7 +17,8 @@ class Collectible extends Model
         'stock',
         'manufacturer',
         'category',
-        'image_path'
+        'image_path',
+        'release_date',
     ];
 
     public function orders()

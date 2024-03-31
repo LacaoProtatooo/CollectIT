@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Collectible;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -39,14 +40,23 @@ class UserController extends Controller
             'password' => $passhash
         ]);
 
-
-        // Save Login
-        // Login::create([
-        //     'user_id' => $user->id,
-        //     'username' => $request->username,
-        //     'password' => $passhash
-        // ]);
-
         return redirect()->route('login.loginpage')->with('successregister', true);
     }
+
+
+    public function collectibles(){
+        $user = Auth::user();
+        $collectibles = Collectible::where('user_id', $user->id)->get();
+
+        return view('user.collectibles', compact('collectibles'));
+    }
+
+    public function profile(){
+        $user = Auth::user();
+        $userinfo = User::where('id', $user->id)->first();
+
+        return view('user.profile', compact('user'));
+    }
+
+    
 }
