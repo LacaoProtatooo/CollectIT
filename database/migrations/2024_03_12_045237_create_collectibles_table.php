@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->index();
             $table->string('name');
-            $table->string('description');
+            $table->longText('description');
             $table->decimal('price', 11, 2);
-            $table->longText('dimension');
+            $table->string('dimension');
             $table->string('condition');
             $table->integer('stock');
             $table->string('manufacturer');

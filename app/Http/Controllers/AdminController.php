@@ -10,20 +10,19 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function index(){
-        $user = auth()->user();
+        $admininfo = auth()->user();
 
+        $users = User::all();
         $collectibles = Collectible::all();
-        $soldcollectible = Collectible::where('status', 'sold')->get();
-        $availablecollectible = Collectible::where('status', 'available')->get();
-
+        
         $usercount = User::count();
         $collectiblecount = Collectible::count();
-
-
-
+        $availablecollectible = Collectible::where('status', 'available')->count();
+        $soldcollectible = Collectible::where('status', 'sold')->count();
+        
         return view('admin.home', 
-        compact('user','collectibles',
-        'availablecollectible','soldcollectible',
-        'usercount','collectiblecount'));
+        compact('admininfo','users','collectibles',
+        'usercount','collectiblecount',
+        'availablecollectible','soldcollectible'));
     }
 }

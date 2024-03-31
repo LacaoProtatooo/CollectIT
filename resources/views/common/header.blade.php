@@ -4,14 +4,13 @@
       <a href="{{ auth()->check() && Auth::user()->role === 'admin' ? route('admin.home') : route('home') }}" class="btn btn-ghost text-center font-bold text-3xl text-primary font-helvetica">Collect-It</a>
     </div>
   
-  
     <div class="flex-none flex gap-2">
       <div class="form-control">
         {{-- SEARCH BAR --}}
         <input type="text" placeholder="Search" class="input input-bordered input-bordered-black w-24 md:w-auto bg-white text-black border-black" />
       </div>
 
-      {{-- LOGIN :: NO USER--}}
+    {{-- LOGIN :: NO USER--}}
     @if (!Auth::user())
         <a href="{{ url('login') }}" class="btn btn-primary text-white border-r-4 w-60 mr-4">Login</a>
     @endif
