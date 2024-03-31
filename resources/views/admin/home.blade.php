@@ -8,12 +8,10 @@
 
     <title>Admin</title>
 </head>
-<body class="bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 ">
+<body class="bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 ">
     @include('common.message')
-    @include('common.header')
+    @include('common.adminheader')
     @csrf
-
-    {{-- compact('user','collectibles','usercount','collectiblecount')); --}}
 
     <!-- THREE TABS -->
     <div class="px-4 pt-6">
@@ -93,6 +91,21 @@
         </div>
         <div class="w-full" id="week-signups-chart"></div>
       </div>
+      <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+        <div class="w-full">
+          <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Couriers</h3>
+          <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">{{$couriercount}}</span>
+          <p class="flex items-center text-base font-normal text-gray-500 dark:text-gray-400">
+            <span class="flex items-center mr-1.5 text-sm text-green-500 dark:text-green-400">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path clip-rule="evenodd" fill-rule="evenodd" d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"></path>
+              </svg>
+            </span>
+            Registered
+          </p>
+        </div>
+        <div class="w-full" id="week-signups-chart"></div>
+      </div>
     </div>
     <br>
 
@@ -166,23 +179,18 @@
                         <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
                             {{$collectible->manufacturer}}
                         </td>
-                        <td class="p-4 whitespace-nowrap">
-                            <!-- SOLD STATUS -->
-                            <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 border border-green-100 dark:border-green-500">{{$collectible->status}}</span>
+                        <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                            {{$collectible->status}}
                         </td>
                         @if ($collectible->status == 'sold')
                             <td>
-                            <button type="button" onclick="window.location.href='{{ route('admin.propertydetails', ['propertyid' => $property->id, 'agentid' => $agentinff->id] ) }}'" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0">Details</button>
+                                <button type="button" onclick="window.location.href='{{ route('admin.collectibledetails', ['collectibleid' => $collectible->id]) }}'" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0">Details</button>
                             </td>  
-                        @else
-                            <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
-                                {{$collectible->status}}
-                            </td>
                         @endif
                       </tr>
+
+
                     @endforeach
-                    
-                  
                 </tbody>
               </table>
             </div>

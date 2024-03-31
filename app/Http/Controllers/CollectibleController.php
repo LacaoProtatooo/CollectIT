@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Auth;
 
 class CollectibleController extends Controller
 {
+    public function collectibles(){
+        $user = Auth::user();
+        $collectibles = Collectible::where('user_id', $user->id)->get();
+
+        return view('user.collectibles', compact('collectibles'));
+    }
+
     public function populate(){
         $collectibles = Collectible::where('status','available')->get();
         // dd($data->name);
@@ -77,6 +84,9 @@ class CollectibleController extends Controller
 
     public function delete($id){
         Collectible::destroy($id);
+
+        $collectible = Collectible::findOrFail($id);
+        $collectible->delete();
 
         return redirect()->route('collectibles.show');
     }

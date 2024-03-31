@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 class Courier extends Model
 {
+    use SoftDeletes;
     protected $fillable = [
         'name',
         'rates',
-        'type'
+        'type',
+        'image_path'
     ];
 
     public function orders()

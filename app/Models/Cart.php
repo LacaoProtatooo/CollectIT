@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cart extends Model
 {
+   use SoftDeletes;
    public function collectibles()
    {
         return $this->belongsToMany(Collectible::class);

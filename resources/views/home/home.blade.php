@@ -9,8 +9,8 @@
 <body class="">
     @include('common.header')
 
-    <div class="max-w-screen-xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mx-auto p-4 mt-4 mb-4">   
-        @include('common.card')
+    <div class="max-w-screen-xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mx-auto p-4 mt-4 mb-4">
+            @include('common.card')
     </div>
 
     @include('common.footer')
