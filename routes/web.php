@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\LoginController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,13 +19,32 @@ Route::get('/', function () {
     return view('home.home');
 });
 
-Route::get('/login', function () {
-    return view('login.login');
-});
+// LOGIN ====================================================================
+Route::get('/login', [LoginController::class, 'loginpage'])->name('login.loginpage');
+Route::post('/', [LoginController::class, 'login'])->name('login.submit');
+Route::match(['get', 'post'], '/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/register', function () {
-    return view('login.register');
-});
+// REGISTER ====================================================================
+Route::get('/register', [LoginController::class, 'signup'])->name('signup.show');
+Route::post('/register/user', [LoginController::class, 'signupuser'])->name('signup.submit');
+
+// ADMIN
+// Route::middleware('admin')->group(function () {
+
+
+
+// });
+
+// USER
+// Route::middleware('user')->group(function () {
+
+
+    
+// });
+
+
+
+
 
 Route::get('/profile', function () {
     return view('user.profile');

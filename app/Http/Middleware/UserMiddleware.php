@@ -22,12 +22,11 @@ class UserMiddleware
             return $next($request);
         }
         else { // Modify Later, pangit auto logout haha
-            
-            abort(401);
-
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
+            
+            abort(401);
         }
     }
 }

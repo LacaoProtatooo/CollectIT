@@ -36,6 +36,6 @@ class Collectible extends Model
 
     public function events()
     {
-        return $this->has(Event::class);
+        return $this->belongsTo(Event::class);
     }
 }

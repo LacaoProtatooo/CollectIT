@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('username');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone_number');
@@ -20,8 +21,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('role');
             $table->date('birthdate');
-            $table->string('image_path');
-            $table->timestamp('created_at')->nullable();
+            $table->string('image_path')->nullable();
+            $table->timestamps();
         });
     }
 
