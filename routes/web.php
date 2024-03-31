@@ -18,7 +18,7 @@ use App\Http\Controllers\CollectibleController;
 |
 */
 
-Route::get('/', function () { return view('home.home'); })->name('home');
+Route::get('/', [CollectibleController::class, 'populate'])->name('home');
 Route::get('/welcome', function () { return view('home.welcome'); })->name('welcome');
 
 // LOGIN =======================================================================

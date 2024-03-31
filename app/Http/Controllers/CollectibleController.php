@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class CollectibleController extends Controller
 {
+    public function populate(){
+        $collectibles = Collectible::where('status','available')->get();   
+
+        return view('home.home', compact('collectibles'));
+    }
     public function edit($id){
         $collectible = Collectible::find($id);
 
