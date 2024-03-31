@@ -33,6 +33,7 @@ Route::post('/register/user', [LoginController::class, 'signupuser'])->name('sig
 // ADMIN =======================================================================
 // Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/home', [AdminController::class, 'index'])->name('admin.home');
+    Route::get('/{collectibleid}/collectible-details', [Admincontroller::class, 'details'])->name('admin.collectibledetails');
 
 
 // });
