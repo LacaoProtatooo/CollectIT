@@ -25,6 +25,7 @@ return new class extends Migration
             $table->date('birthdate');
             $table->string('image_path')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

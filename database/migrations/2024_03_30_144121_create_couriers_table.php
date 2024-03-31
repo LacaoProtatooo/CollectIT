@@ -17,6 +17,8 @@ return new class extends Migration
             $table->double('rates');
             $table->string('type');
             $table->timestamps();
+            $table->softDeletes();
+            
         });
     }
 
