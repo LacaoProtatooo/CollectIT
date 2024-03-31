@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CollectibleController;
 
@@ -17,7 +18,7 @@ use App\Http\Controllers\CollectibleController;
 |
 */
 
-Route::get('/', function () { return view('user.home'); })->name('home');
+Route::get('/', function () { return view('home.home'); })->name('home');
 
 // LOGIN =======================================================================
 Route::get('/login', [LoginController::class, 'loginpage'])->name('login.loginpage');
@@ -29,8 +30,8 @@ Route::get('/register', [LoginController::class, 'signup'])->name('signup.show')
 Route::post('/register/user', [LoginController::class, 'signupuser'])->name('signup.submit');
 
 // ADMIN =======================================================================
-// Route::middleware('admin')->group(function () {
-
+// Route::prefix('admin')->middleware('admin')->group(function () {
+    Route::get('/home', [AdminController::class, 'index'])->name('admin.home');
 
 
 // });

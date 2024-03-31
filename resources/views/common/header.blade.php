@@ -1,8 +1,10 @@
 <div class="navbar bg-cyan-950">
     <img class="mx-auto w-20 ml-4" src="../storage/gundam.png" alt="Collect-It">
     <div class="flex-1">
-      <a href="{{ route('home') }}" class="btn btn-ghost text-center font-bold text-3xl text-primary font-helvetica">Collect-It</a>
+      <a href="{{ auth()->check() && Auth::user()->role === 'admin' ? route('admin.home') : route('home') }}" class="btn btn-ghost text-center font-bold text-3xl text-primary font-helvetica">Collect-It</a>
     </div>
+  
+  
     <div class="flex-none flex gap-2">
       <div class="form-control">
         {{-- SEARCH BAR --}}

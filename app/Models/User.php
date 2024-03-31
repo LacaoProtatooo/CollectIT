@@ -26,6 +26,7 @@ class User extends Authenticatable
         'address',
         'role',
         'birthdate',
+        'status',
         'image_path',
         'password'
 

@@ -17,6 +17,7 @@ class Collectible extends Model
         'stock',
         'manufacturer',
         'category',
+        'status',
         'image_path',
         'release_date',
     ];

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('role');
             $table->string('username');
             $table->string('password');
+            $table->string('status')->default('unverified');
             $table->date('birthdate');
             $table->string('image_path')->nullable();
             $table->timestamps();

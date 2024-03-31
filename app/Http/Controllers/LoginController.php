@@ -30,10 +30,13 @@ class LoginController extends Controller
             {
                 return redirect()->route('home');
             }
+            if(Auth::user()->role === 'admin')
+            {
+                return redirect()->route('admin.home');
+            }
             
             Auth::logout();
             return redirect()->route('home');
-
         } else {
             return back()->withErrors(['credentials' => 'Invalid username or password']);
         }

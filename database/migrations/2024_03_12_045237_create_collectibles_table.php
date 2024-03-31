@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('manufacturer');
             $table->string('category');
             $table->longText('image_path')->nullable();
+            $table->string('status')->default('available');
             $table->date('release_date');
             $table->timestamps();
 

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+
     public function register(Request $request) {
         //dd($request->all());
         $request->validate([
