@@ -10,6 +10,7 @@
 </head>
 <body class="">
     @include('common.header')
+    @include('common.message')
     
     <!-- USER -->
     <div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
@@ -17,21 +18,25 @@
             
             <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">User Information</h1>
         </div>
-        <!-- Agent Profile Pic -->
+        <!-- User Profile Pic -->
         <div class="col-span-full xl:col-auto">
-            <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+            <div class="p-6 mb-6 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 dark:bg-gray-800">
                 <div class="items-center sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
-                    {{-- Upload Image Here !!! --}}
-                    <img class="mb-4 rounded-lg w-28 h-28 sm:mb-0 xl:mb-4 2xl:mb-0" src="https://www.svgrepo.com/show/530585/user.svg" alt="user picture">
+                    @if(isset($userinfo->image_path) && $userinfo->image_path)
+                        <img id="imagePreview" class="mb-6 rounded-lg w-48 h-48 sm:mb-0 xl:mb-6 2xl:mb-0" src="{{ asset($userinfo->image_path) }}" alt="user picture">
+                    @else
+                        <img id="imagePreview" class="mb-6 rounded-lg w-48 h-48 sm:mb-0 xl:mb-6 2xl:mb-0" src="https://www.svgrepo.com/show/530585/user.svg" alt="user picture">
+                    @endif
                     <div>
-                        <h3 class="mb-1 text-xl font-bold text-gray-900 dark:text-white">User : <br>
-                        {{$userinfo->name}}
+                        <h3 class="mb-2 text-2xl font-bold text-gray-900 dark:text-white">User: <br>
+                            {{$userinfo->username}}
                         </h3>
                     </div>
                 </div>
             </div>
-
         </div>
+
+
         <div class="col-span-2">
             <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                 <h3 class="mb-4 text-xl font-semibold dark:text-white">General information</h3>
@@ -40,7 +45,7 @@
                     <div class="grid grid-cols-6 gap-6">
                         <div class="col-span-6 sm:col-span-3">
                             <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
-                            <input type="text" value="{{$userinfo->username}}" name="username" id="username" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="name" required>
+                            <input disabled type="text" value="{{$userinfo->username}}" name="username" id="username" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="name" required>
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
@@ -89,13 +94,20 @@
                         
                         <!-- Save button -->
                         <div class="col-span-6 sm:col-span-3 flex items-center">
-                            <button type="submit" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 mr-5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                            <button type="submit" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 mr-5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
                                 <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">Save</span>
                             </button>
 
                             <label class="flex items-center">
                                 <input type="checkbox" id="changePasswordCheckbox" class="form-checkbox h-5 w-5 text-primary-500">
                                 <span class="ml-2 text-sm text-gray-900 dark:text-white">Change Password</span>
+                            </label>
+
+                            <label for="imageUpload" class="relative ml-5">
+                                <input type="file" name="image" id="imageUpload" class="hidden" accept="image/*" onchange="previewImage(event)">
+                                <div class="px-2 py-1 text-sm font-medium text-gray-900 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 cursor-pointer">
+                                    Upload Image
+                                </div>
                             </label>
                         </div>
 
@@ -120,6 +132,19 @@
                             newPasswordInput.addEventListener('input', checkPasswords);
                             confirmNewPasswordInput.addEventListener('input', checkPasswords);
                         </script>
+
+                        <script>
+                            function previewImage(event) {
+                                const input = event.target;
+                                if (input.files && input.files[0]) {
+                                    const reader = new FileReader();
+                                    reader.onload = function(e) {
+                                        document.getElementById('imagePreview').src = e.target.result;
+                                    }
+                                    reader.readAsDataURL(input.files[0]);
+                                }
+                            }
+                        </script>
                         
     
                         <script>
@@ -135,8 +160,11 @@
                             });
                         </script>
                     </div>
-                </form>
+                </form>    
             </div>
+            <a href="{{ route('user.delete', ['id' => $userinfo->id]) }}" onclick="return confirm('Are you sure you want to deactivate your account?');" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 mr-5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">Deactivate Account</span>
+            </a>
         </div>
     </div>
 

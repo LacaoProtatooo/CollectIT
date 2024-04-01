@@ -2,7 +2,7 @@
     {{-- ../storage/gundam.png --}}
     <img class="mx-auto w-20 ml-4" src="{{  asset('/storage/gundam.png') }}" alt="Collect-It">
     <div class="flex-1">
-      <a href="{{ auth()->check() && Auth::user()->role === 'admin' ? route('admin.home') : route('home') }}" class="btn btn-ghost text-center font-bold text-3xl text-primary font-helvetica">Collect-It</a>
+      <a href="{{ auth()->check() && Auth::user()->role === 'admin' ? route('admin.home') : route('home') }}" class="btn btn-ghost text-center font-bold text-3xl text-info font-helvetica">Collect-It</a>
     </div>
 
     <div class="flex-none flex gap-2">
@@ -29,6 +29,7 @@
         </div>
       </div>
     </div>
+    <p class="text-white">Welcome: {{ Auth::user()->username }}</p>
     <div class="dropdown dropdown-end bg-cyan-950">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full bg-cyan-950">
@@ -41,7 +42,7 @@
           <a href="{{route('profile.show')}}" class="justify-between text-info"> Profile </a>
         </li>
         <li>
-          <a href="{{route('myorders.index') }}" class="justify-between text-info">My Orders</a>
+          {{-- <a href="{{route('myorders.index') }}" class="justify-between text-info">My Orders</a> --}}
         </li>
         <li>
           <a href="{{route('logout') }}" class="justify-between text-info">Logout</a>

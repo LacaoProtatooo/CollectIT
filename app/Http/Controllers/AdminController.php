@@ -7,6 +7,7 @@ use App\Models\Courier;
 use App\Models\Collectible;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -26,6 +27,12 @@ class AdminController extends Controller
         compact('admininfo','users','collectibles',
         'usercount','collectiblecount','couriercount',
         'availablecollectible','soldcollectible'));
+    }
+
+    public function adminprofile()
+    {
+        $userinfo = Auth::user();
+        return view('admin.adminprofile', compact('userinfo'));
     }
 
     // Collectible Details for sold
