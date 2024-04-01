@@ -18,7 +18,12 @@
             <!-- Carousel wrapper -->
             <div class="relative h-auto overflow-hidden rounded-lg md:h-96">
                 @php
+                // dd($collectible);
+                if ($collectible->image_path) {
                 $imagePaths = explode(',', $collectible->image_path);
+            } else {
+                $imagePaths[] = "image.png";
+            }
                 @endphp
 
                 @foreach ($imagePaths as $imagePath)
@@ -68,10 +73,19 @@
             <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Collectible Description:<b> {{$collectible->description}}</b></p><br>
         </div><br>
 
+
         <div class="items-center justify-center relative mb-5">
             @if (auth()->user())
-                {{-- <button type="button" onclick="confirmInquiry('{{ route('cart.create', $collectible->id, $) }}')" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-lg px-5 py-2.5 text-center me-4 mb-2">Add to Cart</button> --}}
-            @endif
+            <div class="flex items-center mb-2">
+                <label class="text-black md:text-2xl tracking-wider dark:text-gray-400">
+                    Quantity
+                </label>
+            </div>
+            <div class="flex items-center mb-2">
+                <input type="number" name="quantity" id="quantity" min="1" max= "{{$collectible->stock}}" value="1" class="text-black bg-white border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent px-4 py-2">
+                <button type="button" onclick="confirmInquiry('{{ route('cart.create', $collectible->id, ) }}')" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-lg px-5 py-2.5 ml-4">Add to Cart</button>
+            </div>
+        @endif
         </div>
     </form>
     </div>

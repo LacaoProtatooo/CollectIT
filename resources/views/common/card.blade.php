@@ -21,7 +21,7 @@
                     <div class="badge badge-outline text-stone-500">{{ $collectible->condition }}</div>
                     <div class="badge badge-outline text-stone-500">Mint</div>
                 </div>
-                <form method="GET" action="{{ route('cart.index', $collectible->id)}}">
+                <form method="GET" action="{{ route('collectible.info', $collectible->id)}}">
                     @csrf
                     @method("GET")
                     <button type="submit" class="btn btn-primary mt-4 px-6 py-2">Buy Now</button>

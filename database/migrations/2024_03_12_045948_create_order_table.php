@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id()->autoIncrement();
             $table->unsignedBigInteger('user_id');
             $table->string('ship_type');
+            $table->integer('quantity');
             $table->string('status');
             $table->date('date');
             $table->timestamps();
             $table->softDeletes();
-            
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

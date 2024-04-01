@@ -6,10 +6,7 @@
     </div>
 
     <div class="flex-none flex gap-2">
-      <div class="form-control">
-        {{-- SEARCH BAR --}}
-        <input type="text" placeholder="Search" class="input input-bordered input-bordered-black w-24 md:w-auto bg-white text-black border-black" />
-      </div>
+      
 
     {{-- LOGIN :: NO USER--}}
     @if (!Auth::user())
