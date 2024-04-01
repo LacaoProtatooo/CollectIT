@@ -9,6 +9,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\CourierController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CollectibleController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,11 @@ Route::post('/register/user', [LoginController::class, 'signupuser'])->name('sig
         Route::post('/increment', [CartController::class,  'add'])->name('cart.add');
         Route::post('/decrement', [CartController::class,  'deduct'])->name('cart.deduct');
     });
+
+    Route::prefix('/collectible/myorders')->group(function () {
+        Route::get('/', [OrderController::class,'index'])->name('myorder.index');
+    });
+
 
 
 

@@ -22,4 +22,9 @@ class Review extends Model
     {
         return $this->belongsTo(Order::class);
     }
+
+    public function collectibles()
+    {
+        return $this->hasMany(Collectible::class);
+    }
 }
