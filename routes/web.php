@@ -83,7 +83,7 @@ Route::post('/register/user', [LoginController::class, 'signupuser'])->name('sig
     });
 
     Route::prefix('/collectible/myorders')->group(function () {
-        Route::get('/', [OrderController::class,'index'])->name('myorder.index');
+        Route::get('/', [OrderController::class,'index'])->name('myorders.index');
     });
 
 
