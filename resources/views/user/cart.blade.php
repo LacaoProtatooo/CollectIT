@@ -16,6 +16,11 @@
   <div class="bg-cyan-900">
 <table class="table bg-cyan-800 text-center">
     <!-- head -->
+    @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
     <thead>
         <tr>
             <th></th>
@@ -23,9 +28,13 @@
             <th>Price</th>
             <th>Quantity</th>
             <th>Action</th>
+            <th>Edit</th>
         </tr>
     </thead>
     <tbody>
+        @php
+            $total = 0;
+        @endphp
         <!-- row 1 -->
         @foreach ($cartItems as $item)
         <tr class="hover:bg-cyan-900">
@@ -35,19 +44,47 @@
             <td>
                 <div class="carousel">
                     <div>
-                        3
+                        {{ $item->pivot->quantity }}
                     </div>
                 </div>
             </td>
-            <td><button class="btn bg-red-700 hover w-16 text-white border-r-4 mr-4">Delete</button></td>
+            <td>
+                <form action="{{ route('cart.delete', ['id' => $item->id]) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn bg-red-700 hover w-16 text-white border-r-4 mr-4">Delete</button>
+                </form>
+            </td>
+            <td>
+                <form action = "{{ route('cart.add') }}" method = "POST">
+                    @csrf
+                    @method('POST')
+                    <input type = "hidden" name = "id" value = {{ $item->id }}>
+                    <button class="btn bg-red-700 hover w-16 text-white border-r-4 mr-4">+</button>
+                </form>
+                <form action = "{{ route('cart.deduct') }}" method = "POST">
+                    @csrf
+                    @method('POST')
+                    <input type = "hidden" name = "id" value = {{ $item->id }}>
+                    <button class="btn bg-red-700 hover w-16 text-white border-r-4 mr-4">-</button>
+                </form>
+
+            </td>
         </tr>
+        @php
+            $subtotal = $item->pivot->quantity * $item->price;
+            $total += $subtotal;
+        @endphp
         @endforeach
 
     <tfoot>
         <tr class=" text-white text-2xl text-opacity-50">
             <td colspan="2"></td>
             <td>Subtotal:</td>
-            <td>$100</td> <!-- Replace with your actual subtotal calculation -->
+            <td>
+
+                {{ $total }}
+            </td> <!-- Replace with your actual subtotal calculation -->
         </tr>
     </tfoot>
 </table>

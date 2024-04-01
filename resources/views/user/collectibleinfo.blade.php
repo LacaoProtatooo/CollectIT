@@ -53,7 +53,9 @@
             </div>
         </div>
         <br>
-    <form method = "POST" action = "">
+    <form method = "POST" action = "{{ route('cart.create') }}">
+        @csrf
+        @method("POST")
         {{-- DETAILS --}}
         <div class="grid md:grid-cols-2 md:gap-2 mb-4 mt-4">
             <div class="mb-1">
@@ -82,8 +84,9 @@
                 </label>
             </div>
             <div class="flex items-center mb-2">
-                <input type="number" name="quantity" id="quantity" min="1" max= "{{$collectible->stock}}" value="1" class="text-black bg-white border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent px-4 py-2">
-                <button type="button" onclick="confirmInquiry('{{ route('cart.create', $collectible->id, ) }}')" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-lg px-5 py-2.5 ml-4">Add to Cart</button>
+                <input type = "hidden" value = "{{ $collectible->id }}" name = "id">
+                <input type="number" name="quantity" id="quantity" min="1" max= "{{$collectible->stock}}" class="text-black bg-white border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent px-4 py-2">
+                <button type="submit" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-lg px-5 py-2.5 ml-4">Add to Cart</button>
             </div>
         @endif
         </div>

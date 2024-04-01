@@ -72,8 +72,12 @@ Route::post('/register/user', [LoginController::class, 'signupuser'])->name('sig
     Route::get('/collectible/info/{id}', [CollectibleController::class, 'collectibleinfo'])->name('collectible.info');
 
     Route::prefix('/collectible/cart')->group(function () {
-        Route::get('/{id}', [CartController::class, 'create'])->name('cart.create');
+
         Route::get('/', [CartController::class, 'index'])->name('cart.index');
+        Route::post('/create', [CartController::class, 'create'])->name('cart.create');
+        Route::delete('/delete/{id}',  [CartController::class, 'delete'])->name('cart.delete');
+        Route::post('/increment', [CartController::class,  'add'])->name('cart.add');
+        Route::post('/decrement', [CartController::class,  'deduct'])->name('cart.deduct');
     });
 
 
