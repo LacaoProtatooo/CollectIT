@@ -9,8 +9,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
+
+use App\Mail\RegisterEmail;
+use Mail;
+
 class UserController extends Controller
 {
+    
 
     public function register(Request $request) {
         //dd($request->all());
@@ -41,7 +46,24 @@ class UserController extends Controller
             'password' => $passhash
         ]);
 
-        return redirect()->route('login.loginpage')->with('successregister', true);
+        Mail::to('henrich.boom@gmail.com')->send(new RegisterEmail($user));
+
+        return redirect()->route('login.loginpage')->with('regissuccess', 'Check Your Email to Verify your Account');
+    }
+
+    public function verifyemail($email){
+
+        $user = User::where('email', $email)->first();
+
+        if(!$user){
+            return redirect()->route('login.loginpage')->with('error','Invalid Verification');
+        }
+
+        $user->update([
+            'status' => 'verified',
+        ]);
+
+        return redirect()->route('login.loginpage')->with('success','Account Verified, You can Login now !');
     }
 
 

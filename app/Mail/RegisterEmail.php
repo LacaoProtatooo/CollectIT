@@ -12,13 +12,13 @@ use Illuminate\Queue\SerializesModels;
 class RegisterEmail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $user;
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -27,7 +27,7 @@ class RegisterEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Register Email',
+            subject: 'Email Verification',
         );
     }
 
@@ -37,7 +37,8 @@ class RegisterEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'email.verify',
+            with: ['user' => $this->user]
         );
     }
 

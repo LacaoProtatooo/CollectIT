@@ -26,6 +26,10 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)){
             $request->session()->regenerate();
             $user = auth()->user();
+            if(Auth::user()->status === 'unverified'){
+                Auth::logout();
+                return redirect()->route('login.loginpage')->with('errorver','Account not Verified!');
+            }
             if(Auth::user()->role === 'user')
             {
                 return redirect()->route('home');

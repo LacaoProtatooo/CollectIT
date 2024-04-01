@@ -11,6 +11,9 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CollectibleController;
 use App\Http\Controllers\OrderController;
 
+use App\Mail\RegisterEmail;
+use Illuminate\Support\Facades\Mail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +38,8 @@ Route::match(['get', 'post'], '/logout', [LoginController::class, 'logout'])->na
 // REGISTER ====================================================================
 Route::get('/register', [LoginController::class, 'signup'])->name('signup.show');
 Route::post('/register/user', [LoginController::class, 'signupuser'])->name('signup.submit');
+// Verify Email
+Route::get('/account/verify/{email}', [UserController::class, 'verifyemail'])->name('account.verify');
 
 // ADMIN =======================================================================
 // Route::prefix('admin')->middleware('admin')->group(function () {
@@ -91,5 +96,8 @@ Route::post('/register/user', [LoginController::class, 'signupuser'])->name('sig
 
 
 //});
+
+
+
 
 
