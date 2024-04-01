@@ -28,6 +28,7 @@ class AdminSeeder extends Seeder
             'phone_number' => $faker->phoneNumber,
             'email' => $defaultEmail,
             'address' => 'TUP-TAGUIG',
+            'status' => 'verified',
             'role' => 'admin',
             'birthdate' => $defaultBirthdate,
             'password' => Hash::make('123123123'),

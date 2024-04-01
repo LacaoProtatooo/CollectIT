@@ -9,6 +9,7 @@
 </style>
 </head>
 <body class="bg-[../storage/bg.png] bg-fixed bg-cover h-screen">
+    @include('common.message')
     <div class="bg-fixed bg-cover h-screen" style="background-image: url('../storage/bg.png');">
         <div class="flex min-h-full flex-col justify-center px-60 py-12 lg:px-8 items-center">
             <div class="card w-96 bg-base-100 shadow-xl image-full justify-center">
