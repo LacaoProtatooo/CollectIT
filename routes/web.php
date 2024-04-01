@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\CourierController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CollectibleController;
 
 /*
@@ -68,7 +69,12 @@ Route::post('/register/user', [LoginController::class, 'signupuser'])->name('sig
     Route::post('/collectible/{id}/update', [CollectibleController::class, 'update'])->name('collectible.update');
     Route::get('/collectible/{id}/delete', [CollectibleController::class, 'delete'])->name('collectible.delete');
 
-    
+    Route::prefix('/collectible/cart')->group(function () {
+        Route::get('/{id}', [CartController::class, 'create'])->name('cart.create');
+        Route::get('/', [CartController::class, 'index'])->name('cart.index');
+    });
+
+
 
 
 //});

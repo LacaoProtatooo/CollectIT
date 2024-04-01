@@ -4,7 +4,7 @@
     <div class="flex-1">
       <a href="{{ auth()->check() && Auth::user()->role === 'admin' ? route('admin.home') : route('home') }}" class="btn btn-ghost text-center font-bold text-3xl text-primary font-helvetica">Collect-It</a>
     </div>
-  
+
     <div class="flex-none flex gap-2">
       <div class="form-control">
         {{-- SEARCH BAR --}}
@@ -27,7 +27,7 @@
       <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
         <div class="card-body bg-cyan-950 rounded border border-cyan-800">
           <div class="card-actions">
-            <a href="{{ url('cart') }}" class="btn btn-primary btn-block">View cart</a>
+            <a href="{{ route('cart.index') }}" class="btn btn-primary btn-block">View cart</a>
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@
       </ul>
     </div>
     @endif
-      
+
 
 
     </div>

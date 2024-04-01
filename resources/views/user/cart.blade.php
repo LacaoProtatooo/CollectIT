@@ -27,35 +27,22 @@
     </thead>
     <tbody>
         <!-- row 1 -->
+        @foreach ($cartItems as $item)
         <tr class="hover:bg-cyan-900">
             <th>1</th>
-            <td>Cy Ganderton</td>
-            <td>2000</td>
+            <td>{{ $item->name }}</td>
+            <td>{{ $item->price }}</td>
             <td>
-                1
                 <div class="carousel">
-                    <button class="btn bg-red-700 hover text-white border-r-4 mr-1 btn-xs" onclick="changeQuantity(this, '+')">+</button>
-                    <button class="btn bg-red-700 hover text-white border-r-4 mr-1 btn-xs" onclick="changeQuantity(this, '-')">-</button>
+                    <div>
+                        3
+                    </div>
                 </div>
             </td>
             <td><button class="btn bg-red-700 hover w-16 text-white border-r-4 mr-4">Delete</button></td>
         </tr>
-        <!-- row 2 -->
-        <tr class="hover:bg-cyan-900">
-            <th>2</th>
-            <td>Hart Hagerty</td>
-            <td>3000</td>
-            <td>
-                1
-                <div class="carousel">
-                    <button class="btn bg-red-700 hover text-white border-r-4 mr-1 btn-xs" onclick="changeQuantity(this, '+')">+</button>
-                    <button class="btn bg-red-700 hover text-white border-r-4 mr-1 btn-xs" onclick="changeQuantity(this, '-')">-</button>
-                </div>
-            </td>
-            <td><button class="btn bg-red-700 hover w-16 text-white border-r-4 mr-4">Delete</button></td>
-        </tr>
-    </tbody>
-    <!-- subtotal -->
+        @endforeach
+
     <tfoot>
         <tr class=" text-white text-2xl text-opacity-50">
             <td colspan="2"></td>
