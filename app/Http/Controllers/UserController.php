@@ -46,7 +46,7 @@ class UserController extends Controller
             'password' => $passhash
         ]);
 
-        Mail::to('henrich.boom@gmail.com')->send(new RegisterEmail($user));
+        Mail::to('markalbartolome@gmail.com')->send(new RegisterEmail($user));
 
         return redirect()->route('login.loginpage')->with('regissuccess', 'Check Your Email to Verify your Account');
     }
