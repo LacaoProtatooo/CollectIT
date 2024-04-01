@@ -91,7 +91,7 @@
 </div>
 
     <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-cyan-900">
-    <form class="card-body bg-cyan-900 rounded-md">
+    <form class="card-body bg-cyan-900 rounded-md" method="POST" action="{{ route('order.migrate') }}">
         <div class="form-control">
             <label class="label">
                 <span class="label-text">Email</span>
@@ -109,19 +109,29 @@
             <label class="label">
                 <span class="label-text">Courier</span>
             </label>
-            <select id="courier-select" class="select select-bordered">
-                @foreach ($couriers as $courier)
-                    <option value="{{ $courier->id }}" data-rates="{{ $courier->rates }}">{{ $courier->name }} - {{ $courier->rates }} - {{ $courier->type }}</option>
-                @endforeach
-            </select>
-            <label class="label">
-                {{-- {{ $courier->rate }} --}}
-            </label>
+
+                @csrf <!-- CSRF token -->
+                @method('POST')
+                <select id="courier-select" class="select select-bordered" name="courier">
+                    @foreach ($couriers as $courier)
+                        <option value="{{ $courier->id }}" data-rates="{{ $courier->rates }}">{{ $courier->name }} - {{ $courier->rates }} - {{ $courier->type }}</option>
+                    @endforeach
+                </select>
+                <input type = "hidden" name = "cartID" value = "{{ $cartID }}">
+                <button type="submit" class="btn btn-primary">Check Out</button>
+                {{-- @php
+                    dd($cartID);
+                @endphp --}}
+            </form>
+
         </div>
         <div class="form-control mt-6">
-            <button class="btn btn-primary">Check Out</button>
+
+
+
+
         </div>
-    </form>
+
     <div class="text-center m-4 bg-cyan-900">
         <h2 id = "total-price" class=" text-2xl">Total Price: {{ $total + $courier->rates }}</h2>
     </div>
