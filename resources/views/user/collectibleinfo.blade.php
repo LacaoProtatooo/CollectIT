@@ -77,6 +77,11 @@
 
 
         <div class="items-center justify-center relative mb-5">
+            @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
             @if (auth()->user())
             <div class="flex items-center mb-2">
                 <label class="text-black md:text-2xl tracking-wider dark:text-gray-400">

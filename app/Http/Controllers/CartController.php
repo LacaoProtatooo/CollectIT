@@ -13,33 +13,42 @@ class CartController extends Controller
      */
     public function create(Request $request)
     {
-        if (Cart::where("user_id", Auth::user()->id)->count() == 0) {
-            $cart = new Cart();
-            $cart->user_id = Auth::user()->id;
-            $cart->save();
+            $existingQuantity = $request->quantity;
+            $maxQuantity = Collectible::find($request->id)->stock; // Assuming there's a field in your Collectible model indicating the maximum quantity
+            if ($existingQuantity <= $maxQuantity) {
 
 
-            $collectible = Collectible::find($request->id);
-            $cart->collectibles()->attach($collectible->id, ['quantity' => $request->quantity]);
+                if (Cart::where("user_id", Auth::user()->id)->count() == 0) {
+                    $cart = new Cart();
+                    $cart->user_id = Auth::user()->id;
+                    $cart->save();
+
+
+                    $collectible = Collectible::find($request->id);
+                    $cart->collectibles()->attach($collectible->id, ['quantity' => $request->quantity]);
+                } else {
+                    $cart = Cart::where("user_id", Auth::user()->id)->first();
+
+                    $existingCollectible = $cart->collectibles()->where('collectible_id', $request->id)->first();
+                    // dd($existingCollectible);
+                    if($existingCollectible)
+                    {
+                        $existingQuantity = $existingCollectible->pivot->quantity;
+                        // dd( $existingQuantity);
+                        $newQuantity = $existingQuantity + $request->quantity;
+                        $cart->collectibles()->updateExistingPivot($request->id, ['quantity' => $newQuantity]);
+                    }else{
+                        $collectible = Collectible::find($request->id);
+                        $cart->collectibles()->attach($collectible->id, ['quantity' => $request->quantity]);
+                    }
+                }
+
+            // Redirect to the cart page
+            return redirect()->route('cart.index');
+
         } else {
-            $cart = Cart::where("user_id", Auth::user()->id)->first();
-
-            $existingCollectible = $cart->collectibles()->where('collectible_id', $request->id)->first();
-            // dd($existingCollectible);
-            if($existingCollectible)
-            {
-                $existingQuantity = $existingCollectible->pivot->quantity;
-                // dd( $existingQuantity);
-                $newQuantity = $existingQuantity + $request->quantity;
-                $cart->collectibles()->updateExistingPivot($request->id, ['quantity' => $newQuantity]);
-            }else{
-                $collectible = Collectible::find($request->id);
-                $cart->collectibles()->attach($collectible->id, ['quantity' => $request->quantity]);
-            }
+            return redirect()->back()->with('error', 'The maximum quantity for this collectible has been reached.');
         }
-
-        // Redirect to the cart page
-        return redirect()->route('cart.index');
     }
 
     /**
