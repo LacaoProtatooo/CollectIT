@@ -8,7 +8,7 @@
     <title>Collectible Info</title>
 </head>
 <body class="bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200">
-    @include('common.message') 
+    @include('common.message')
     @include('common.header')
     <br>
 
@@ -20,7 +20,7 @@
                 @php
                 $imagePaths = explode(',', $collectible->image_path);
                 @endphp
-            
+
                 @foreach ($imagePaths as $imagePath)
                     <div class="hidden duration-700 ease-in-out rounded-lg" data-carousel-item>
                         <img src="{{ asset($imagePath) }}" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-lg" alt="">
@@ -48,7 +48,7 @@
             </div>
         </div>
         <br>
-
+    <form method = "POST" action = "">
         {{-- DETAILS --}}
         <div class="grid md:grid-cols-2 md:gap-2 mb-4 mt-4">
             <div class="mb-1">
@@ -67,12 +67,13 @@
         <div class="items-center justify-center relative mb-5">
             <p class="text-black md:text-2xl tracking-wider dark:text-gray-400">Collectible Description:<b> {{$collectible->description}}</b></p><br>
         </div><br>
-        
+
         <div class="items-center justify-center relative mb-5">
             @if (auth()->user())
-                {{-- <button type="button" onclick="confirmInquiry('{{ route('cart.create', $collectible->id) }}')" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-lg px-5 py-2.5 text-center me-4 mb-2">Add to Cart</button> --}}
+                {{-- <button type="button" onclick="confirmInquiry('{{ route('cart.create', $collectible->id, $) }}')" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-lg px-5 py-2.5 text-center me-4 mb-2">Add to Cart</button> --}}
             @endif
         </div>
+    </form>
     </div>
 
     <script>
