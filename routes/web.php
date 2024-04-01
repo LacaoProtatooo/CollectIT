@@ -83,6 +83,7 @@ Route::get('/user/{id}/delete', [UserController::class, 'delete'])->name('user.d
     Route::put('/collectible/{id}/restore', [CollectibleController::class, 'restore'])->name('collectible.restore');
     Route::post('/collectible/{id}/update', [CollectibleController::class, 'update'])->name('collectible.update');
     Route::delete('/collectible/{id}/delete', [CollectibleController::class, 'delete'])->name('collectible.delete');
+    Route::post('/collectible/search', [CollectibleController::class, 'search'])->name('collectible.search');
 
     Route::get('/collectible/info/{id}', [CollectibleController::class, 'collectibleinfo'])->name('collectible.info');
 

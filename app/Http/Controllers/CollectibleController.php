@@ -159,5 +159,24 @@ class CollectibleController extends Controller
         return redirect()->back()->with('success', 'Collectible restored successfully');
     }
 
+    public function search(Request $request)
+    {
+        $keyword = $request->searchcontent;
+        $collectibles = Collectible::query();
+        $collectibles->where(function ($query) use ($keyword) {
+            $query->where('name', 'like', '%' . $keyword . '%')
+                ->orWhere('description', 'like', '%' . $keyword . '%')
+                ->orWhere('category', 'like', '%' . $keyword . '%');
+        });
+        $collectibles = $collectibles->get();
+
+        if ($user = Auth::check()) {
+            return view('user.home', compact('collectibles'));
+        } else {
+            return view('home.home', compact('collectibles'));
+        }
+    }
+
+
 
 }
