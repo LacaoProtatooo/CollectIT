@@ -69,6 +69,8 @@ Route::post('/register/user', [LoginController::class, 'signupuser'])->name('sig
     Route::post('/collectible/{id}/update', [CollectibleController::class, 'update'])->name('collectible.update');
     Route::get('/collectible/{id}/delete', [CollectibleController::class, 'delete'])->name('collectible.delete');
 
+    Route::get('/collectible/info', [CollectibleController::class, 'collectibleinfo'])->name('collectible.info');
+
     Route::prefix('/collectible/cart')->group(function () {
         Route::get('/{id}', [CartController::class, 'create'])->name('cart.create');
         Route::get('/', [CartController::class, 'index'])->name('cart.index');
