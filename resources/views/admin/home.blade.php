@@ -107,8 +107,27 @@
         <div class="w-full" id="week-signups-chart"></div>
       </div>
     </div>
-    <br>
+    <div class="px-4 pt-6">
+      <div class="grid grid-cols-3 gap-4 mt-4">
+          <div class="bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800">
+              <div class="p-4 sm:p-6">
+                  @include('charts.linechart')
+              </div>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800">
+              <div class="p-4 sm:p-6">
+                  @include('charts.barchart')
+              </div>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800">
+              <div class="p-4 sm:p-6">
+                  @include('charts.piechart')
+              </div>
+          </div>
+      </div>
+  </div>  
 
+    <br>
     <!-- COLLECTIBLES -->
     <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
       <!-- Card header -->

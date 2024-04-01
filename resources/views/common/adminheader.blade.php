@@ -34,13 +34,10 @@
                     <a disabled class="justify-between text-info">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a>
                 </li>
                 <li>
-                    <a href="{{route('profile.show')}}" class="justify-between text-info"> Profile </a>
+                    <a href="{{route('admin.profile')}}" class="justify-between text-info"> Profile </a>
                 </li>
                 <li>
                     <a href="{{route('logout') }}" class="justify-between text-info">Logout</a>
-                </li>
-                <li>
-                    <a href="{{route('collectibles.show') }}" class="justify-between text-info">Collectibles</a>
                 </li>
             </ul>
         </div>
