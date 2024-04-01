@@ -88,12 +88,58 @@ class UserController extends Controller
         return view('user.collectibles', compact('collectibles'));
     }
 
-    public function profile(){
-        $user = Auth::user();
-        $userinfo = User::where('id', $user->id)->first();
-
-        return view('user.profile', compact('user'));
+    public function profile()
+    {
+        $userinfo = Auth::user();
+        return view('user.userprofile', compact('userinfo'));
     }
+
+    public function delete($id){
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect()->route('logout');
+    }
+
+    public function profileupdate(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:11',
+            'address' => 'required|string|max:255',
+        ]);
+
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->phone_number = $request->phone_number;
+        $user->address = $request->address;
+
+        if ($request->filled('new_password')) {
+            $request->validate([
+                'new_password' => 'required|string|min:8',
+            ]);
+
+            $user->password = Hash::make($request->new_password);
+        }
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = uniqid() . '_' . $image->getClientOriginalName();
+            $image->move('storage', $filename);
+            $imagePath = 'storage/' . $filename;
+            $user->image_path = $imagePath;
+        }
+
+        $user->save();
+
+        $routeName = $user->role === 'user' ? 'profile.show' : 'admin.profile';
+
+        return redirect()->route($routeName)->with('profilesuccess', 'Profile Information Updated Successfully');
+    }
+
 
 
 }

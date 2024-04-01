@@ -41,10 +41,17 @@ Route::post('/register/user', [LoginController::class, 'signupuser'])->name('sig
 // Verify Email
 Route::get('/account/verify/{email}', [UserController::class, 'verifyemail'])->name('account.verify');
 
+// USER AND ADMIN
+Route::post('/user/update', [UserController::class, 'profileupdate'])->name('user.update');
+Route::get('/user/{id}/delete', [UserController::class, 'delete'])->name('user.delete');
+
 // ADMIN =======================================================================
 // Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/home', [AdminController::class, 'index'])->name('admin.home');
     Route::get('/{collectibleid}/collectible-details', [Admincontroller::class, 'details'])->name('admin.collectibledetails');
+
+    Route::get('/admprofile', [Admincontroller::class, 'adminprofile'])->name('admin.profile');
+    
 
     // Events
     Route::get('/event', [EventController::class, 'events'])->name('event.show');
