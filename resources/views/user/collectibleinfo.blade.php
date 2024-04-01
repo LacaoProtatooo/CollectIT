@@ -108,6 +108,24 @@
         }
     </script>
 
+<div class="card bg-cyan-700 text-neutral-content m-4">
+  <div class="card-body items-center text-center">
+    <h2 class="card-title text-white md:text-2xl tracking-wider dark:text-gray-400">Reviews</h2>
+    <div class="chat chat-start">
+  <div class="chat-image avatar">
+    <div class="w-10 rounded-full">
+      <img alt="Tailwind CSS chat bubble component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+    </div>
+  </div>
+  <div class="chat-header rounded-lg p-1 text-white">
+    Obi-Wan Kenobi
+  </div>
+  <div class="chat-bubble w-66  bg-cyan-900 rounded-lg p-3 text-white">Kunware Review to, good shi to legittt, hahahaha ayoko na, pass nadin ako kay pres nasusungit nako sobra</div>
+</div>
+    </div>
+  </div>
+</div>
+
     @include('common.footer')
 </body>
 </html>
