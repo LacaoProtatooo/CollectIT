@@ -5,25 +5,27 @@
         @endphp
 
         {{-- CARDS --}}
-        <div class="card w-96 bg-slate-200 shadow-xl" style="margin: 20px;">
-            <figure>
-                <img class="collectibleImage{{ $collectible->id }}" src="{{ asset(trim($imagePaths[0])) }}" alt="collectible" style="object-fit: cover; width: 100%; height: 200px;">
-            </figure>
-            <div class="card-body" style="height: 350px; overflow: hidden;">
-                <h2 class="card-title text-stone-900">
-                    {{ $collectible->name }} <br>
-                    <span class="text-primary font-bold">{{ $collectible->price }}</span>
-                </h2>
-                <p class="text-stone-500" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                    {{ $collectible->description }}
-                </p> <!-- Adjusted to show description -->
-                <div class="card-actions justify-end">
-                    <div class="badge badge-outline text-stone-500">Gundam</div>
-                    <div class="badge badge-outline text-stone-500">Mint</div>
+        <a href="{{ route('collectible.info', ['id' => $collectible->id]) }}">
+            <div class="card w-96 bg-slate-200 shadow-xl" style="margin: 20px;">
+                <figure>
+                    <img class="collectibleImage{{ $collectible->id }}" src="{{ asset(trim($imagePaths[0])) }}" alt="collectible" style="object-fit: cover; width: 100%; height: 200px;">
+                </figure>
+                <div class="card-body" style="height: 350px; overflow: hidden;">
+                    <h2 class="card-title text-stone-900">
+                        {{ $collectible->name }} <br>
+                        <span class="text-primary font-bold">{{ $collectible->price }}</span>
+                    </h2>
+                    <p class="text-stone-500" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                        {{ $collectible->description }}
+                    </p> <!-- Adjusted to show description -->
+                    <div class="card-actions justify-end">
+                        <div class="badge badge-outline text-stone-500">Gundam</div>
+                        <div class="badge badge-outline text-stone-500">Mint</div>
+                    </div>
+                    <button class="btn btn-primary mt-4 px-6 py-2">Buy Now</button>
                 </div>
-                <button class="btn btn-primary mt-4 px-6 py-2">Buy Now</button>
             </div>
-        </div>
+        </a>
 
         <script>
             const imagePaths{{ $collectible->id }} = {!! json_encode($imagePaths) !!};

@@ -80,6 +80,13 @@ class CollectibleController extends Controller
         return redirect()->route('collectibles.show');
     }
 
+    public function collectibleinfo(Request $request){
+        $id = $request->query('id');
+        $collectible = Collectible::where('id', $id)->first();
+
+        return view('user.collectibleinfo', compact('collectible'));
+    }
+
 
 
     public function delete($id){
