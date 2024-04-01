@@ -18,8 +18,8 @@
                     {{ $collectible->description }}
                 </p> <!-- Adjusted to show description -->
                 <div class="card-actions justify-end">
-                    <div class="badge badge-outline text-stone-500">{{ $collectible->condition }}</div>
-                    <div class="badge badge-outline text-stone-500">Mint</div>
+                    <div class="badge badge-outline text-stone-500">Condition: {{ $collectible->condition }}</div>
+                    <div class="badge badge-outline text-stone-500">Category: {{ $collectible->category }}</div>
                 </div>
                 <form method="GET" action="{{ route('collectible.info', $collectible->id)}}">
                     @csrf

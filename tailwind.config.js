@@ -38,6 +38,8 @@ module.exports = {
   },
   plugins: [
     require("daisyui"),
-    require('flowbite/plugin')
+    require('flowbite/plugin')({
+      charts: true,
+    }),
   ],
 }
