@@ -73,8 +73,9 @@ Route::get('/account/verify/{email}', [UserController::class, 'verifyemail'])->n
     Route::get('/collectible/create', [CollectibleController::class, 'create'])->name('collectible.create');
     Route::post('/collectible/store', [CollectibleController::class, 'store'])->name('collectible.store');
     Route::get('/collectible/{id}/edit', [CollectibleController::class, 'edit'])->name('collectible.edit');
+    Route::put('/collectible/{id}/restore', [CollectibleController::class, 'restore'])->name('collectible.restore');
     Route::post('/collectible/{id}/update', [CollectibleController::class, 'update'])->name('collectible.update');
-    Route::get('/collectible/{id}/delete', [CollectibleController::class, 'delete'])->name('collectible.delete');
+    Route::delete('/collectible/{id}/delete', [CollectibleController::class, 'delete'])->name('collectible.delete');
 
     Route::get('/collectible/info/{id}', [CollectibleController::class, 'collectibleinfo'])->name('collectible.info');
 

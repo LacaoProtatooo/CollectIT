@@ -13,8 +13,12 @@ class CollectibleController extends Controller
 {
     public function collectibles(){
         $user = Auth::user();
-        $collectibles = Collectible::where('user_id', $user->id)->get();
+        $nottrashedcollectibles = Collectible::where('user_id', $user->id)->get();
+    // Retrieve all soft deleted collectibles
+        $trashedCollectibles = Collectible::onlyTrashed()->get();
 
+    // Merge both collections
+        $collectibles = $nottrashedcollectibles->merge($trashedCollectibles);
         return view('user.collectibles', compact('collectibles'));
     }
 
@@ -89,9 +93,7 @@ class CollectibleController extends Controller
 
 
 
-    public function delete($id){
-        Collectible::destroy($id);
-
+    public function delete($id) {
         $collectible = Collectible::findOrFail($id);
         $collectible->delete();
 
@@ -143,6 +145,18 @@ class CollectibleController extends Controller
         ]);
 
         return redirect()->route('collectibles.show')->with('successcollectible', true);
+    }
+
+    public function restore($id)
+    {
+        // Find the soft deleted collectible by ID
+        $collectible = Collectible::withTrashed()->findOrFail($id);
+
+        // Restore the collectible
+        $collectible->restore();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Collectible restored successfully');
     }
 
 

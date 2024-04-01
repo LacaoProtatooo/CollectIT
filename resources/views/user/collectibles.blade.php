@@ -72,24 +72,24 @@
                         <td class="text-center">
                             <a href="{{ route('collectible.edit', $collectible->id) }}" class="btn btn-sm btn-primary me-2"><i class="fas fa-edit"></i> Edit</a>
                             @if ($collectible->trashed())
-                                {{-- Restore button --}}
-                                <form method="POST" action="">
+        {{-- Restore button --}}
+                                <form method="POST" action="{{ route('collectible.restore', $collectible->id) }}">
                                     @csrf
                                     @method('PUT')
                                     <button type="submit" class="uppercase bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md">
                                         Restore
                                     </button>
                                 </form>
-                            @else
+                            @endif
                                 {{-- Delete button --}}
-                                <form method="POST" action="">
+                                <form method="POST" action="{{ route('collectible.delete', $collectible->id) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="uppercase bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md">
                                         Delete
                                     </button>
                                 </form>
-                            @endif
+
                         </td>
                     </tr>
                 @endforeach
