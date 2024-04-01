@@ -53,7 +53,9 @@
             </div>
         </div>
         <br>
-    <form method = "POST" action = "">
+    <form method = "POST" action = "{{ route('cart.create') }}">
+        @csrf
+        @method("POST")
         {{-- DETAILS --}}
         <div class="grid md:grid-cols-2 md:gap-2 mb-4 mt-4">
             <div class="mb-1">
@@ -75,6 +77,11 @@
 
 
         <div class="items-center justify-center relative mb-5">
+            @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
             @if (auth()->user())
             <div class="flex items-center mb-2">
                 <label class="text-black md:text-2xl tracking-wider dark:text-gray-400">
@@ -82,8 +89,9 @@
                 </label>
             </div>
             <div class="flex items-center mb-2">
-                <input type="number" name="quantity" id="quantity" min="1" max= "{{$collectible->stock}}" value="1" class="text-black bg-white border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent px-4 py-2">
-                <button type="button" onclick="confirmInquiry('{{ route('cart.create', $collectible->id, ) }}')" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-lg px-5 py-2.5 ml-4">Add to Cart</button>
+                <input type = "hidden" value = "{{ $collectible->id }}" name = "id">
+                <input type="number" name="quantity" id="quantity" min="1" max= "{{$collectible->stock}}" class="text-black bg-white border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent px-4 py-2">
+                <button type="submit" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-lg px-5 py-2.5 ml-4">Add to Cart</button>
             </div>
         @endif
         </div>
@@ -99,6 +107,24 @@
             }
         }
     </script>
+
+<div class="card bg-cyan-700 text-neutral-content m-4">
+  <div class="card-body items-center text-center">
+    <h2 class="card-title text-white md:text-2xl tracking-wider dark:text-gray-400">Reviews</h2>
+    <div class="chat chat-start">
+  <div class="chat-image avatar">
+    <div class="w-10 rounded-full">
+      <img alt="Tailwind CSS chat bubble component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+    </div>
+  </div>
+  <div class="chat-header rounded-lg p-1 text-white">
+    Obi-Wan Kenobi
+  </div>
+  <div class="chat-bubble w-66  bg-cyan-900 rounded-lg p-3 text-white">Kunware Review to, good shi to legittt, hahahaha ayoko na, pass nadin ako kay pres nasusungit nako sobra</div>
+</div>
+    </div>
+  </div>
+</div>
 
     @include('common.footer')
 </body>

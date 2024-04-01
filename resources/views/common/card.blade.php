@@ -46,5 +46,8 @@
 
             transitionImages{{ $collectible->id }}();
         </script>
+
+        
     @endforeach
 @endif
+

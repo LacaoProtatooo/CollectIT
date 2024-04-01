@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Mail;
 Route::get('/', [CollectibleController::class, 'populate'])->name('home');
 Route::get('/welcome', function () { return view('home.welcome'); })->name('welcome');
 Route::get('/cart', function () { return view('user.cart'); })->name('cart');
+Route::get('/test', function () { return view('home.test'); })->name('test');
 
 // LOGIN =======================================================================
 Route::get('/login', [LoginController::class, 'loginpage'])->name('login.loginpage');
@@ -77,8 +78,12 @@ Route::get('/account/verify/{email}', [UserController::class, 'verifyemail'])->n
     Route::get('/collectible/info/{id}', [CollectibleController::class, 'collectibleinfo'])->name('collectible.info');
 
     Route::prefix('/collectible/cart')->group(function () {
-        Route::get('/{id}', [CartController::class, 'create'])->name('cart.create');
+
         Route::get('/', [CartController::class, 'index'])->name('cart.index');
+        Route::post('/create', [CartController::class, 'create'])->name('cart.create');
+        Route::delete('/delete/{id}',  [CartController::class, 'delete'])->name('cart.delete');
+        Route::post('/increment', [CartController::class,  'add'])->name('cart.add');
+        Route::post('/decrement', [CartController::class,  'deduct'])->name('cart.deduct');
     });
 
 
