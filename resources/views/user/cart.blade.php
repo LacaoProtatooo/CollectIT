@@ -96,35 +96,58 @@
             <label class="label">
                 <span class="label-text">Email</span>
             </label>
-            <input type="email" placeholder="Email" class="input input-bordered" required />
+            <input type="email" value = "{{ $user->email }}" class="input input-bordered" required />
         </div>
+
         <div class="form-control">
             <label class="label">
                 <span class="label-text">Address</span>
             </label>
-            <input type="Address" placeholder="Address" class="input input-bordered" required />
+            <input type="Address" value = "{{ $user->address }}" class="input input-bordered" required />
         </div>
         <div class="form-control">
             <label class="label">
                 <span class="label-text">Courier</span>
             </label>
-            <select class="select select-bordered">
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+            <select id="courier-select" class="select select-bordered">
+                @foreach ($couriers as $courier)
+                    <option value="{{ $courier->id }}" data-rates="{{ $courier->rates }}">{{ $courier->name }} - {{ $courier->rates }} - {{ $courier->type }}</option>
+                @endforeach
             </select>
+            <label class="label">
+                {{-- {{ $courier->rate }} --}}
+            </label>
         </div>
         <div class="form-control mt-6">
-            <button class="btn btn-primary">Login</button>
+            <button class="btn btn-primary">Check Out</button>
         </div>
     </form>
     <div class="text-center m-4 bg-cyan-900">
-        <h2 class=" text-2xl">Total Price: $PLACEHOLDER$</h2>
+        <h2 id = "total-price" class=" text-2xl">Total Price: {{ $total + $courier->rates }}</h2>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the select element for the courier
+            const courierSelect = document.querySelector("#courier-select");
+
+            // Add onchange event listener
+            courierSelect.addEventListener("change", function() {
+                // Get the selected courier's rates
+                const selectedCourierRates = parseFloat(courierSelect.options[courierSelect.selectedIndex].getAttribute("data-rates"));
+
+                // Update the total price display
+                const totalPrice = parseFloat({{ $total }}) + selectedCourierRates;
+                document.querySelector("#total-price").textContent = "Total Price: " + totalPrice.toFixed(2);
+            });
+        });
+    </script>
     </div>
   </div>
 </div>
 
     @include('common.footer')
 </body>
+{{-- @php
+dd($couriers);
+@endphp --}}
 </html>

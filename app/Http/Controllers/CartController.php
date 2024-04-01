@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Collectible;
 use App\Models\Cart;
+use App\Models\Courier;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -64,8 +65,11 @@ class CartController extends Controller
 
         // $quantity = $request->quantity;
         $cartItems = Cart::where('user_id', Auth::user()->id)->firstOrFail()->collectibles()->withPivot('quantity')->get();
+        $couriers = Courier::get();
+        $user = Auth::user();
+        // dd($courier);
         // dd($cartItems);
-        return view('user.cart', compact('cartItems'));
+        return view('user.cart', compact('cartItems', 'couriers', 'user'));
     }
 
     /**
