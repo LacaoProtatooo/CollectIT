@@ -26,7 +26,7 @@ class CartController extends Controller
 
 
                     $collectible = Collectible::find($request->id);
-                    $cart->collectibles()->attach($collectible->id, ['quantity' => $request->quantity]);
+                    $cart->collectibles()->attach($collectible->id, ['quantity' => $request->quantity, 'rateStatus'=> 'toRate']);
                 } else {
                     $cart = Cart::where("user_id", Auth::user()->id)->first();
 
@@ -65,11 +65,12 @@ class CartController extends Controller
 
         // $quantity = $request->quantity;
         $cartItems = Cart::where('user_id', Auth::user()->id)->firstOrFail()->collectibles()->withPivot('quantity')->get();
+        $cartID = Cart::where('user_id', Auth::user()->id)->firstOrFail()->id;
         $couriers = Courier::get();
         $user = Auth::user();
-        // dd($courier);
+        // dd($cartID);
         // dd($cartItems);
-        return view('user.cart', compact('cartItems', 'couriers', 'user'));
+        return view('user.cart', compact('cartItems', 'couriers', 'user', 'cartID'));
     }
 
     /**

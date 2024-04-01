@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id()->autoIncrement();
             $table->unsignedBigInteger('user_id');
             $table->string('ship_type');
-            $table->integer('quantity');
             $table->string('status');
             $table->date('date');
             $table->timestamps();

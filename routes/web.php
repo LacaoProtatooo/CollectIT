@@ -10,6 +10,7 @@ use App\Http\Controllers\CourierController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CollectibleController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReviewController;
 
 use App\Mail\RegisterEmail;
 use Illuminate\Support\Facades\Mail;
@@ -88,8 +89,18 @@ Route::get('/account/verify/{email}', [UserController::class, 'verifyemail'])->n
         Route::post('/decrement', [CartController::class,  'deduct'])->name('cart.deduct');
     });
 
+    Route::prefix('/collectible/order')->group(function () {
+        Route::get('/', [OrderController::class,'index'])->name('order.index');
+        Route::post('/migrate', [OrderController::class,'migrate'])->name('order.migrate');
+    });
+
     Route::prefix('/collectible/myorders')->group(function () {
         Route::get('/', [OrderController::class,'index'])->name('myorders.index');
+        Route::post('/summary', [OrderController::class,'summary'])->name('myorders.summary');
+    });
+
+    Route::prefix('/collectible/review')->group(function () {
+        Route::post('/create', [ReviewController::class,'create'])->name('review.create');
     });
 
 
