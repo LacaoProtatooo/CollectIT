@@ -14,19 +14,21 @@
         <div class="overflow-x-auto">
         </div>
     </div>
+    @php
+    $overTotal = 0;
+ @endphp
+
     <h2 class="card-title">Summary</h2>
-    <div class="hero min-h-screen bg-base-200">
-        @php
-        $overTotal = 0;
-    @endphp
     @foreach ($collectibles as $collectible)
+    <div class="hero min-h-screen bg-base-200">
+
         <div class="card-body">
             <label class="form-control w-full max-w-xs">
                 <div class="grid grid-cols-2 gap-4">
                     <div class="label">
                         <span class="label-text">Product Name</span>
                     </div>
-                    <input type="text" value="{{$collectible->name}}" class="input input-bordered w-full max-w-xs bg-white text-black" readonly />
+                    <input type="text" value="{{$collectible->name}}" class="input input-bordered w-full max-w-xs bg-white text-black " readonly />
 
                     <div class="label">
                         <span class="label-text">Manufacturer</span>
@@ -62,6 +64,8 @@
             @if($collectible->pivot->status == 'toRate')
                 <h3 class="font-bold text-lg">Your Review</h3>
                 <form method="POST" action="{{ route('review.create') }}">
+                    @csrf
+                    @method('GET')
                     <input type = "hidden" name = "colID" value = "{{ $collectible->id }}">
                     <input type = "hidden" name = "ordID" value = "{{ $order->id }}">
                 <label class="form-control">
@@ -69,7 +73,8 @@
                     <textarea name = "review" class="textarea textarea-bordered h-24 bg-white text-black" placeholder="Write your review here"></textarea>
                     <div class="card-actions justify-end">
 
-                        @csrf
+
+
                         <button type="submit" class="btn w-full content-center bg-green-500 text-white">Publish</button>
                     </form>
                 </label>
@@ -80,10 +85,11 @@
 
             </div>
         </div>
-    @endforeach
+
 
 
     </div>
+    @endforeach
     </div>
 
     <div class="flex justify-center">
@@ -105,5 +111,6 @@
         </div>
     </div>
     @include('common.footer')
+</div>
 </body>
 </html>

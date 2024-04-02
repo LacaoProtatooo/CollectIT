@@ -24,6 +24,7 @@ class OrderController extends Controller
         // dd($request);
         $orderID = $request->id;
         $order = Order::find($orderID);
+        // dd($request->id);
         $courier = Courier::where('id', $orderID)->first();
         if ($order) {
             $collectibles = $order->collectibles()->withPivot('quantity', 'status')->orderBy('id', 'desc')->paginate(10);

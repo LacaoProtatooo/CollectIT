@@ -52,7 +52,7 @@ Route::get('/user/{id}/delete', [UserController::class, 'delete'])->name('user.d
     Route::get('/{collectibleid}/collectible-details', [Admincontroller::class, 'details'])->name('admin.collectibledetails');
 
     Route::get('/admprofile', [Admincontroller::class, 'adminprofile'])->name('admin.profile');
-    
+
 
     // Events
     Route::get('/event', [EventController::class, 'events'])->name('event.show');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataTables\CollectibleDataTable;
 use App\Models\Collectible;
+use App\Models\Review;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -87,8 +88,20 @@ class CollectibleController extends Controller
     public function collectibleinfo($id){
         // $id = $request->query('id');
         $collectible = Collectible::where('id', $id)->first();
-        // dd($collectible);
-        return view('user.collectibleinfo', compact('collectible'));
+        $review = Collectible::where('id', $id)->firstOrFail()->reviews()->get();
+        $userIds = $review->pluck('pivot.user_id')->unique();
+        $users = User::whereIn('id', $userIds)->get();
+
+        $data = $review->map(function ($review) use ($users) {
+            $user = $users->firstWhere('id', $review->pivot->user_id);
+            return [
+                'review' => $review,
+                'user' => $user,
+            ];
+        });
+
+        dd($data);
+        return view('user.collectibleinfo', compact('collectible', 'review'));
     }
 
 

@@ -26,7 +26,7 @@ class CartController extends Controller
 
 
                     $collectible = Collectible::find($request->id);
-                    $cart->collectibles()->attach($collectible->id, ['quantity' => $request->quantity, 'rateStatus'=> 'toRate']);
+                    $cart->collectibles()->attach($collectible->id, ['quantity' => $request->quantity, 'Status'=> 'toRate']);
                 } else {
                     $cart = Cart::where("user_id", Auth::user()->id)->first();
 

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('collectible_review', function (Blueprint $table) {
             $table->unsignedBigInteger('review_id');
             $table->unsignedBigInteger('collectible_id');
+            
 
             $table->foreign('review_id')->references('id')->on('reviews')->onDelete('cascade');
             $table->foreign('collectible_id')->references('id')->on('collectibles')->onDelete('cascade');

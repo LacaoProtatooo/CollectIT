@@ -42,7 +42,7 @@
           <a href="{{route('profile.show')}}" class="justify-between text-info"> Profile </a>
         </li>
         <li>
-          {{-- <a href="{{route('myorders.index') }}" class="justify-between text-info">My Orders</a> --}}
+          <a href="{{route('myorders.index') }}" class="justify-between text-info">My Orders</a>
         </li>
         <li>
           <a href="{{route('logout') }}" class="justify-between text-info">Logout</a>
