@@ -65,7 +65,7 @@
                 <h3 class="font-bold text-lg">Your Review</h3>
                 <form method="POST" action="{{ route('review.create') }}">
                     @csrf
-                    @method('GET')
+                    @method('PUT')
                     <input type = "hidden" name = "colID" value = "{{ $collectible->id }}">
                     <input type = "hidden" name = "ordID" value = "{{ $order->id }}">
                 <label class="form-control">
