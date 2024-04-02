@@ -88,20 +88,13 @@ class CollectibleController extends Controller
     public function collectibleinfo($id){
         // $id = $request->query('id');
         $collectible = Collectible::where('id', $id)->first();
-        $review = Collectible::where('id', $id)->firstOrFail()->reviews()->get();
-        $userIds = $review->pluck('pivot.user_id')->unique();
-        $users = User::whereIn('id', $userIds)->get();
+        $reviews = Collectible::where('id', $id)
+    ->firstOrFail()
+    ->reviews() // Include user_id from pivot table
+    ->get();
+    //    dd($reviews);
 
-        $data = $review->map(function ($review) use ($users) {
-            $user = $users->firstWhere('id', $review->pivot->user_id);
-            return [
-                'review' => $review,
-                'user' => $user,
-            ];
-        });
-
-        dd($data);
-        return view('user.collectibleinfo', compact('collectible', 'review'));
+        return view('user.collectibleinfo', compact('collectible', 'reviews'));
     }
 
 
