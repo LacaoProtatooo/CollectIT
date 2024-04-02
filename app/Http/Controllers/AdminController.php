@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use App\Charts\BarChart;
+use App\Charts\LineChart;
+use App\Charts\PieChart;
+
 use App\Models\User;
 use App\Models\Courier;
 use App\Models\Collectible;
@@ -11,6 +16,26 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->bgcolor = collect([
+            '#7158e2',
+            '#3ae374',
+            '#ff3838',
+            "#FF851B",
+            "#7FDBFF",
+            "#B10DC9",
+            "#FFDC00",
+            "#001f3f",
+            "#39CCCC",
+            "#01FF70",
+            "#85144b",
+            "#F012BE",
+            "#3D9970",
+            "#111111",
+            "#AAAAAA",
+        ]);
+    }
     public function index(){
         $admininfo = auth()->user();
 
@@ -22,11 +47,91 @@ class AdminController extends Controller
         $availablecollectible = Collectible::where('status', 'available')->count();
         $soldcollectible = Collectible::where('status', 'sold')->count();
         $couriercount = Courier::count();
+
+        // CHARTS ==============================================================================
+        // PIE CHART
+        $collectiblesales = Collectible::whereIn('status', ['sold', 'available'])->get();
+
+        $saleschart = new PieChart();
+        $dataset = $saleschart->labels(['Available', 'Sold']);
+        $dataset = $saleschart->dataset(
+            'Collectible Sales',
+            'pie',
+            [count($collectiblesales->where('status', 'available')), count($collectiblesales->where('status', 'sold'))]
+        );
+        $dataset = $dataset->backgroundColor(['#3ae374', '#ff3838']);
+        $saleschart->options([
+            'backgroundColor' => '#fff',
+            'fill' => false,
+            'responsive' => true,
+            'legend' => ['display' => true],
+            'tooltips' => ['enabled' => true],
+            'aspectRatio' => 1,
+            'scales' => [
+                'yAxes' => [
+                    [
+                        'display' => true,
+                    ],
+                ],
+                'xAxes' => [
+                    [
+                        'gridLines' => ['display' => false],
+                        'display' => true,
+                    ],
+                ],
+            ],
+        ]);
+
+        // BAR CHART
+        $collectibleStocksData = Collectible::select('stock', DB::raw('count(*) as stock_count'))
+        ->groupBy('stock')
+        ->orderBy('stock', 'asc')
+        ->get();
+
+        $labels = $collectibleStocksData->pluck('stock')->toArray();
+        $counts = $collectibleStocksData->pluck('stock_count')->toArray();
+
+        $collectibleStocksChart = new BarChart();
+        $collectibleStocksChart->labels($labels); 
+        $dataset = $collectibleStocksChart->dataset( // Storing the dataset for further modification
+        'Collectible Stocks',
+        'bar',
+        $counts 
+        );
+
+        // Applying formatting similar to the pie chart
+        $dataset->backgroundColor(['#3ae374', '#ff3838']); // Set background colors
+        $collectibleStocksChart->options([
+        'backgroundColor' => '#fff',
+        'fill' => false,
+        'responsive' => true,
+        'legend' => ['display' => true],
+        'tooltips' => ['enabled' => true],
+        'aspectRatio' => 1,
+        'scales' => [
+            'yAxes' => [
+                [
+                    'display' => true,
+                ],
+            ],
+            'xAxes' => [
+                [
+                    'gridLines' => ['display' => false],
+                    'display' => true,
+                ],
+            ],
+        ],
+        ]);
+
+        // MISSING: LINE CHART
+        
+        // END OF CHARTS ==============================================================================
         
         return view('admin.home', 
         compact('admininfo','users','collectibles',
         'usercount','collectiblecount','couriercount',
-        'availablecollectible','soldcollectible'));
+        'availablecollectible','soldcollectible',
+        'saleschart','collectibleStocksChart'));
     }
 
     public function adminprofile()
