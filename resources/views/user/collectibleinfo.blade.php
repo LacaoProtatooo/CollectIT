@@ -114,10 +114,15 @@
             <div class="card-body items-center text-center">
             <h2 class="card-title text-white md:text-2xl tracking-wider dark:text-gray-400">Reviews</h2>
                 @foreach ($reviews as $rev)
+                            @php
+                                $id = $rev->user_id;
+                                $name = App\Models\User::where('id', $id)->first();
+                                // dd($name);
+                            @endphp
                         <div class="chat chat-start">
                             <div class="chat-image avatar">
                             <div class="w-10 rounded-full">
-                                <img alt="Tailwind CSS chat bubble component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                <img alt="Tailwind CSS chat bubble component" src="{{ asset($name->image_path) }} />
                             </div>
                             @php
                                 $id = $rev->user_id;

@@ -18,10 +18,10 @@ class CollectibleFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => 2,
-            'name' => $this->faker->name(),
+            'user_id' => $this->faker->numberBetween(1, 5),
+            'name' => $this->faker->words(rand(1, 3), true),
             'description' => $this->faker->paragraph(),
-            'price' => $this->faker->randomDigit(),
+            'price' => $this->faker->randomNumber(),
             'dimension' => $this->faker->word(),
             'condition' => $this->faker->word(),
             'stock' => $this->faker->randomDigit(),
@@ -30,7 +30,7 @@ class CollectibleFactory extends Factory
             'image_path' => 'image.png', // Assuming image_path is a string, you may want to use `imageUrl()` or `image()` if you want fake image paths
             'status' => $this->faker->randomElement(['available', 'sold']),
             'release_date' => $this->faker->dateTimeThisDecade(),
-            
+
         ];
     }
 }

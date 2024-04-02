@@ -24,7 +24,10 @@ class CollectibleController extends Controller
     }
 
     public function populate(){
-        $collectibles = Collectible::where('status','available')->get();
+        $userId = Auth::id();
+        $collectibles = Collectible::where('status', 'available')
+        ->whereNotIn('user_id', [$userId])
+        ->get();
         // dd($data->name);
 
 

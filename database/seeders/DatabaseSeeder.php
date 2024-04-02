@@ -14,8 +14,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             AdminSeeder::class,
-            //CollectibleSeeder::class,
+            // CollectibleSeeder::class,
+            // CourierSeeder::class,
             // Other seeders...
+
         ]);
 
         // \App\Models\User::factory(10)->create();

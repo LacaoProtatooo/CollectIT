@@ -65,18 +65,16 @@
                 <h3 class="font-bold text-lg">Your Review</h3>
                 <form method="POST" action="{{ route('review.create') }}">
                     @csrf
-                    @method('PUT')
-                    <input type = "hidden" name = "colID" value = "{{ $collectible->id }}">
-                    <input type = "hidden" name = "ordID" value = "{{ $order->id }}">
-                <label class="form-control">
-                    <!-- Your Review textarea -->
-                    <textarea name = "review" class="textarea textarea-bordered h-24 bg-white text-black" placeholder="Write your review here"></textarea>
+                    <input type="hidden" name="colID" value="{{ $collectible->id }}">
+                    <input type="hidden" name="ordID" value="{{ $order->id }}">
+                    <label class="form-control">
+                        <!-- Your Review textarea -->
+                        <textarea name="review" class="textarea textarea-bordered h-24 bg-white text-black" placeholder="Write your review here"></textarea>
+                    </label>
                     <div class="card-actions justify-end">
-
-
-
                         <button type="submit" class="btn w-full content-center bg-green-500 text-white">Publish</button>
-                    </form>
+                    </div>
+                </form>
                 </label>
             @else
                 <h3 class="font-bold text-lg">Reviewed</h3>
