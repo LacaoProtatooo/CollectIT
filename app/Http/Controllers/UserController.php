@@ -140,6 +140,12 @@ class UserController extends Controller
         return redirect()->route($routeName)->with('profilesuccess', 'Profile Information Updated Successfully');
     }
 
+    public function index()
+    {
+        $users = User::all();
+        return view('admin.users', compact('users'));
+    }
+
 
 
 }

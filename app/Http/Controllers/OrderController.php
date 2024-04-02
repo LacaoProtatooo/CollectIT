@@ -6,6 +6,8 @@ use App\Models\Cart\Collectible;
 use App\Models\Order;
 use App\Models\Courier;
 use Illuminate\Http\Request;
+use App\Mail\TransacComplete;
+use Mail;
 use Auth;
 
 class OrderController extends Controller
@@ -29,6 +31,8 @@ class OrderController extends Controller
         if ($order) {
             $collectibles = $order->collectibles()->withPivot('quantity', 'status')->orderBy('id', 'desc')->paginate(10);
         }
+
+
 
        return view('user.orderSummary', compact('collectibles', 'order','courier'));
     }
@@ -59,6 +63,27 @@ class OrderController extends Controller
             $collectibleId = $collectible->id;
             $order->collectibles()->attach($collectibleId, ['quantity' => $quantity, 'status'=> 'toRate']);
         }
+            $collectibles = $order->collectibles()->withPivot('quantity', 'status')->orderBy('id', 'desc')->paginate(10);
+            // dd($collectibles)  ;
+            foreach ($collectibles as $collectible) {
+                $pivot = $collectible->pivot;
+                $quantity = $pivot->quantity;
+                $status = $order->status;
+
+                // dd($status);
+                if ($status === 'toShip') {
+                    $newStock = $collectible->stock - $quantity;
+                    $collectible->update(['stock' => $newStock]);
+                }
+
+                if($collectible->stock < 1)
+                {
+                    $collectible->update(['status' => 'sold']);
+                }
+            }
+            $user = Auth::user();
+            Mail::to($user->email)->send(new TransacComplete($user));
+
 
         $cart = Cart::destroy($cartID);
         return redirect()->route('order.index');
@@ -82,9 +107,10 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+        $orders = Order::with('user', 'courier')->get();
+        return view('admin.order', compact('orders'));
     }
 
     /**

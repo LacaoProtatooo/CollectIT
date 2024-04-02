@@ -17,6 +17,7 @@
                 <p class="text-stone-500" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                     {{ $collectible->description }}
                 </p> <!-- Adjusted to show description -->
+
                 <div class="card-actions justify-end">
                     <div class="badge badge-outline text-stone-500">Condition: {{ $collectible->condition }}</div>
                     <div class="badge badge-outline text-stone-500">Category: {{ $collectible->category }}</div>
@@ -24,7 +25,9 @@
                 <form method="GET" action="{{ route('collectible.info', $collectible->id)}}">
                     @csrf
                     @method("GET")
-                    <button type="submit" class="btn btn-primary mt-4 px-6 py-2">Buy Now</button>
+
+                    <button type="submit" class="btn btn-primary mt-4 px-6 py-2">More Info</button>
+                    <div class="badge badge-outline text-stone-500">Stock: {{ $collectible->stock }}</div>
                 </form>
             </div>
         </div>
@@ -47,7 +50,7 @@
             transitionImages{{ $collectible->id }}();
         </script>
 
-        
+
     @endforeach
 @endif
 

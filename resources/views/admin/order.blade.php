@@ -22,65 +22,51 @@
                     <tr>
 
                         <th scope="col" class="px-6 py-3">
-                            ID
+                            Order ID
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            NAME
+                            Customer Name
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Phone Number
+                            Date Ordered
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Email
+                            Courier Name
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Address
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Username
+                            Shipping Type
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Status
                         </th>
-                        <th scope="col" class="px-6 py-3">
-                            Images
-                        </th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $user)
-                    @php
-                        $imagePaths = explode(',', $user->image_path);
-                    @endphp
+                    @foreach ($orders as $order)
+
 
                     <tr class="bg-gray-100">
 
                         <td class="px-6 py-4">
-                            {{ $user->id }}
+                            {{ $order->id }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $user->first_name . " " . $user->last_name }}
+                            {{ $order->user->first_name . " " . $order->user->last_name }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $user->phone_number }}
+                            {{ $order->date }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $user->email }}
+                            {{ $order->courier->name }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $user->address }}
+                            {{ $order->ship_type }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $user->username }}
+                            {{ $order->status }}
                         </td>
-                        <td class="px-6 py-4">
-                            {{ $user->status }}
-                        </td>
-                        <td class="px-6 py-4 flex space-x-2">
-                            @foreach($imagePaths as $imagePath)
-                                <img src="{{ asset($imagePath) }}" alt="courier Image" style="max-width: 100px; max-height: 150px;">
-                            @endforeach
-                        </td>
+
                     </tr>
 
                     @endforeach

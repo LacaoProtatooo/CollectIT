@@ -43,11 +43,11 @@ Route::post('/register/user', [LoginController::class, 'signupuser'])->name('sig
 Route::get('/account/verify/{email}', [UserController::class, 'verifyemail'])->name('account.verify');
 
 // USER AND ADMIN
-Route::post('/user/update', [UserController::class, 'profileupdate'])->name('user.update');
-Route::get('/user/{id}/delete', [UserController::class, 'delete'])->name('user.delete');
+Route::post('/user/update', [UserController::class, 'profileupdate'])->middleware('admin', 'user')->name('user.update');
+Route::get('/user/{id}/delete', [UserController::class, 'delete'])->middleware('admin', 'user')->name('user.delete');
 
 // ADMIN =======================================================================
-// Route::prefix('admin')->middleware('admin')->group(function () {
+Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/home', [AdminController::class, 'index'])->name('admin.home');
     Route::get('/{collectibleid}/collectible-details', [Admincontroller::class, 'details'])->name('admin.collectibledetails');
 
@@ -70,10 +70,18 @@ Route::get('/user/{id}/delete', [UserController::class, 'delete'])->name('user.d
     Route::post('/courier/{id}/update', [CourierController::class, 'update'])->name('courier.update');
     Route::get('/courier/{id}/delete', [CourierController::class, 'delete'])->name('courier.delete');
 
-// });
+    //users
+    Route::prefix('/user')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('users.index');
+    });
+    Route::prefix('/order')->group(function () {
+        Route::get('/', [OrderController::class, 'show'])->name('order.show');
+    });
+
+});
 
 // USER =========================================================================
-//Route::prefix('user')->middleware('user')->group(function () {
+Route::prefix('user')->middleware('user')->group(function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('profile.show');
 
     // Collectible
@@ -115,7 +123,7 @@ Route::get('/user/{id}/delete', [UserController::class, 'delete'])->name('user.d
 
 
 
-//});
+});
 
 
 

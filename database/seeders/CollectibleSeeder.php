@@ -12,6 +12,6 @@ class CollectibleSeeder extends Seeder
      */
     public function run(): void
     {
-        Collectible::factory()->count(10)->create();
+        Collectible::factory()->count(30)->create();
     }
 }

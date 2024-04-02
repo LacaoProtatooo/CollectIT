@@ -26,7 +26,7 @@ class AdminMiddleware
             $request->session()->invalidate();
             $request->session()->regenerateToken();
 
-            abort(401);
+            return redirect()->back();
         }
 
     }

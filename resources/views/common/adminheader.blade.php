@@ -5,10 +5,10 @@
         <a href="{{ auth()->check() && Auth::user()->role === 'admin' ? route('admin.home') : route('home') }}" class="btn btn-ghost text-center font-bold text-3xl text-info font-helvetica">Collect-It</a>
     </div>
     <div class="flex items-center gap-4 justify-center">
-        <a href="" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-7 py-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+        <a href="{{ route('users.index') }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-7 py-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
             Users
         </a>
-        <a href="" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-7 py-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+        <a href="{{ route('order.show') }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-7 py-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
             Orders
         </a>
         <a href="{{ route('courier.show')}}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-7 py-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">

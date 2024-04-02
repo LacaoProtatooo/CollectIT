@@ -21,18 +21,18 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    public function definition()
     {
         return [
-            'username' => $this->faker()->username,
-            'first_name' => $this->faker()->first_name,
-            'last_name' =>  $this->faker()->first_name,
-            'phone_number' => $this->faker()->phoneNumber,
-            'email' => $this->faker()->email,
-            'address' => $this->faker()->address,
+            'username' => $this->faker->userName,
+            'first_name' => $this->faker->firstName,
+            'last_name' =>  $this->faker->lastName,
+            'phone_number' => $this->faker->phoneNumber,
+            'email' => $this->faker->email,
+            'address' => $this->faker->address,
             'status' => 'verified',
             'role' => 'admin',
-            'birthdate' => $this->faker()->defaultBirthdate,
+            'birthdate' => $this->faker->dateTimeThisCentury->format('Y-m-d'),
             'password' => Hash::make('123123123'),
         ];
     }
