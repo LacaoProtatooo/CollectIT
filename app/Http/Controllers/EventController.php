@@ -15,8 +15,12 @@ class EventController extends Controller
         $user = Auth::user();
         $events = Event::All();
 
-
         return view('admin.events', compact('events'));
+    }
+
+    public function ongoingevents(){
+        $events = Event::All();
+        return view('home.events', compact('events'));
     }
 
     public function create(){

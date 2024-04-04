@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    protected $bgcolor;
     public function __construct()
     {
         $this->bgcolor = collect([
@@ -94,14 +95,15 @@ class AdminController extends Controller
 
         $collectibleStocksChart = new BarChart();
         $collectibleStocksChart->labels($labels); 
-        $dataset = $collectibleStocksChart->dataset( // Storing the dataset for further modification
-        'Collectible Stocks',
-        'bar',
-        $counts 
-        );
 
-        // Applying formatting similar to the pie chart
-        $dataset->backgroundColor(['#3ae374', '#ff3838']); // Set background colors
+        $backgroundColor = [];
+        foreach ($counts as $count) {
+        $backgroundColor[] = $this->bgcolor->shift();
+        }
+
+        $dataset = $collectibleStocksChart->dataset('Collectible Stocks', 'bar', $counts);
+        $dataset->backgroundColor($backgroundColor);
+
         $collectibleStocksChart->options([
         'backgroundColor' => '#fff',
         'fill' => false,
@@ -123,6 +125,7 @@ class AdminController extends Controller
             ],
         ],
         ]);
+
 
         // MISSING: LINE CHART
         

@@ -6,6 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/app.css','resources/js/app.js'])
 
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
     <title>Admin</title>
 </head>
 <body class="bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 ">
@@ -153,7 +160,7 @@
         <div class="overflow-x-auto rounded-lg">
           <div class="inline-block min-w-full align-middle">
             <div class="overflow-hidden shadow sm:rounded-lg">
-              <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+              <table id="collectibleTable" class="min-w-full divide-y divide-gray-200 dark:divide-gray-600 table table-bordered table-hover">
                 <thead class="bg-gray-50 dark:bg-gray-700">
                   <tr>
                     <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
@@ -218,6 +225,17 @@
                     @endforeach
                 </tbody>
               </table>
+
+              <!-- Bootstrap JS -->
+              <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+              <!-- DataTables JS -->
+              <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+              <!-- Initialize DataTables -->
+              <script>
+                  $(document).ready(function() {
+                      $('#collectibleTable').DataTable();
+                  });
+              </script>
             </div>
           </div>
         </div>

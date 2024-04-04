@@ -14,13 +14,6 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
     <title>Collectibles</title>
-
-    <!-- Custom CSS -->
-    <style>
-        body {
-            background-color: white; /* Set background color to white */
-        }
-    </style>
 </head>
 <body>
     @include('common.header')
@@ -35,9 +28,8 @@
             <link href = "https://cdn.datatables.net/2.0.3/js/dataTables.min.js" rel = "stylesheet"> --}}
         </div>
 
-
         {{-- COLLECTIBLES TABLE --}}
-        <table id="artworkTable" class="table table-bordered table-hover">
+        <table id="collectibleTable" class="table table-bordered table-hover">
             <thead class="bg-gray-800 text-white">
                 <tr>
                     <th>Name</th>
@@ -72,7 +64,7 @@
                         <td class="text-center">
                             <a href="{{ route('collectible.edit', $collectible->id) }}" class="btn btn-sm btn-primary me-2"><i class="fas fa-edit"></i> Edit</a>
                             @if ($collectible->trashed())
-        {{-- Restore button --}}
+                            {{-- Restore button --}}
                                 <form method="POST" action="{{ route('collectible.restore', $collectible->id) }}">
                                     @csrf
                                     @method('PUT')
@@ -89,7 +81,6 @@
                                         Delete
                                     </button>
                                 </form>
-
                         </td>
                     </tr>
                 @endforeach
@@ -104,7 +95,7 @@
     <!-- Initialize DataTables -->
     <script>
         $(document).ready(function() {
-            $('#artworkTable').DataTable();
+            $('#collectibleTable').DataTable();
         });
     </script>
 

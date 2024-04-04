@@ -50,6 +50,9 @@
         <li>
           <a href="{{route('collectibles.show') }}" class="justify-between text-info">Collectibles</a>
         </li>
+        <li>
+          <a href="{{route('events.show') }}" class="justify-between text-info">Ongoing Events</a>
+        </li>
       </ul>
     </div>
     @endif
