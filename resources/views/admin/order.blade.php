@@ -66,7 +66,14 @@
                         <td class="px-6 py-4">
                             {{ $order->status }}
                         </td>
-
+                        <td>
+                            @if ($order->status == 'toShip')
+                            <a type="button" href="{{ route('order.shipping', ['id' => $order->id]) }}" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0">Shipping</a>
+                            @endif
+                            @if ($order->status == 'shipping')
+                            <a type="button" href="{{ route('order.shipped', ['id' => $order->id]) }}" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0">Shipped</a>
+                            @endif 
+                        </td>
                     </tr>
 
                     @endforeach

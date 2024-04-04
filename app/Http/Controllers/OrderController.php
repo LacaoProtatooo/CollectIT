@@ -63,9 +63,9 @@ class OrderController extends Controller
         foreach ($cart->collectibles as $collectible) {
             $quantity = $collectible->pivot->quantity;
             $collectibleId = $collectible->id;
-            $order->collectibles()->attach($collectibleId, ['quantity' => $quantity, 'status'=> 'toRate']);
+            $order->collectibles()->attach($collectibleId, ['quantity' => $quantity, 'reviewStat'=> 'toRate']);
         }
-            $collectibles = $order->collectibles()->withPivot('quantity', 'status')->orderBy('id', 'desc')->paginate(10);
+            $collectibles = $order->collectibles()->withPivot('quantity', 'reviewStat')->orderBy('id', 'desc')->paginate(10);
             // dd($collectibles)  ;
             foreach ($collectibles as $collectible) {
                 $pivot = $collectible->pivot;
@@ -90,52 +90,30 @@ class OrderController extends Controller
         $cart = Cart::destroy($cartID);
         return redirect()->route('order.index');
     }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+
+    public function shipping($id){
+        $order = Order::findOrFail($id);
+        $order->status = 'shipping';
+        $order->date = now();
+        $order->save();
+
+        return redirect()->route('order.show');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function shipped($id){
+        $order = Order::findOrFail($id);
+        $order->status = 'shipped';
+        $order->date = now();
+        $order->save();
+
+        return redirect()->route('order.show');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show()
     {
         $orders = Order::with('user', 'courier')->get();
         return view('admin.order', compact('orders'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    
 }

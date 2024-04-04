@@ -70,7 +70,11 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::post('/courier/{id}/update', [CourierController::class, 'update'])->name('courier.update');
     Route::get('/courier/{id}/delete', [CourierController::class, 'delete'])->name('courier.delete');
 
-    //users
+    // Order
+    Route::get('/collectible/{id}/shipping', [OrderController::class, 'shipping'])->name('order.shipping');
+    Route::get('/collectible/{id}/shipped', [OrderController::class, 'shipped'])->name('order.shipped');
+
+    // Users
     Route::prefix('/user')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('users.index');
     });

@@ -9,6 +9,7 @@ use App\Charts\PieChart;
 
 use App\Models\User;
 use App\Models\Courier;
+use App\Models\Order;
 use App\Models\Collectible;
 
 use Illuminate\Http\Request;
@@ -142,8 +143,18 @@ class AdminController extends Controller
 
     // Collectible Details for sold
     public function details($id){
-        $collectible = Collectible::find($id);
+        $collectibleinfo = Collectible::find($id);
+        $sellerinfo = User::where('id', $collectibleinfo->id)->first();
 
+        $customerinfo = Order::leftJoin('carts', 'orders.user_id', '=', 'carts.user_id')
+        ->leftJoin('users', 'carts.user_id', '=', 'users.id')
+        ->select('orders.*', 'users.*', 'carts.*')
+        ->first();
+
+        //dd($customerinfo);
+
+        return view('admin.collectibledetails', compact('customerinfo','sellerinfo','collectibleinfo')); 
     }
+
 
 }

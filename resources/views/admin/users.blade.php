@@ -78,7 +78,7 @@
                         </td>
                         <td class="px-6 py-4 flex space-x-2">
                             @foreach($imagePaths as $imagePath)
-                                <img src="{{ asset($imagePath) }}" alt="courier Image" style="max-width: 100px; max-height: 150px;">
+                                <img src="{{ asset($imagePath) }}" alt="user Image" style="max-width: 100px; max-height: 150px;">
                             @endforeach
                         </td>
                     </tr>
