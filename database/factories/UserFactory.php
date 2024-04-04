@@ -31,7 +31,7 @@ class UserFactory extends Factory
             'email' => $this->faker->email,
             'address' => $this->faker->address,
             'status' => 'verified',
-            'role' => 'admin',
+            'role' => 'user',
             'birthdate' => $this->faker->dateTimeThisCentury->format('Y-m-d'),
             'password' => Hash::make('123123123'),
         ];
