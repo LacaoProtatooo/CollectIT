@@ -60,8 +60,8 @@
                     <input type="text" value="{{$totalPrice}}" class="input input-bordered w-full max-w-xs bg-white text-black" readonly />
                 </div>
             </label>
-
-            @if($collectible->pivot->status == 'toRate')
+         
+            @if($collectible->pivot->reviewStat == 'toRate')
                 <h3 class="font-bold text-lg">Your Review</h3>
                 <form method="POST" action="{{ route('review.create') }}">
                     @csrf
@@ -76,7 +76,7 @@
                     </div>
                 </form>
                 </label>
-            @else
+            @elseif($collectible->pivot->reviewStat == 'rated')
                 <h3 class="font-bold text-lg">Reviewed</h3>
             @endif
 

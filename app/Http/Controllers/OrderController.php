@@ -30,11 +30,11 @@ class OrderController extends Controller
         // dd($request->id);
         $courier = Courier::where('id', $order->courier_id)->first();
         if ($order) {
-            $collectibles = $order->collectibles()->withPivot('quantity', 'status')->orderBy('id', 'desc')->paginate(10);
+            $collectibles = $order->collectibles()->withPivot('quantity', 'reviewStat')->orderBy('id', 'desc')->paginate(10);
         }
         // dd($courier);
 
-
+        
 
        return view('user.orderSummary', compact('collectibles', 'order','courier'));
     }
@@ -115,5 +115,5 @@ class OrderController extends Controller
         return view('admin.order', compact('orders'));
     }
 
-    
+
 }

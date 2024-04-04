@@ -37,7 +37,7 @@ class ReviewController extends Controller
         $collectible->reviews()->attach($review->id);
         Order::find($ordId)
         ->collectibles()
-        ->updateExistingPivot($colId, ['status' => 'rated']);
+        ->updateExistingPivot($colId, ['reviewStat' => 'rated']);
         return redirect()->route('myorders.index');
     }
 
