@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Carbon\Carbon;
 use App\Charts\BarChart;
 use App\Charts\LineChart;
 use App\Charts\PieChart;
@@ -126,16 +127,48 @@ class AdminController extends Controller
         ],
         ]);
 
+        // LINE CHART
+        $projectedUsers = User::selectRaw('DATE(created_at) as date, COUNT(*) as user_count')
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
 
-        // MISSING: LINE CHART
-        
+        $labels = $projectedUsers->pluck('date')->toArray();
+        $counts = $projectedUsers->pluck('user_count')->toArray();
+
+        $projectedUsersChart = new LineChart();
+        $projectedUsersChart->labels($labels); 
+        $dataset = $projectedUsersChart->dataset('Projected Users', 'line', $counts);
+
+        $projectedUsersChart->options([
+            'backgroundColor' => '#fff',
+            'fill' => false,
+            'responsive' => true,
+            'legend' => ['display' => true],
+            'tooltips' => ['enabled' => true],
+            'aspectRatio' => 1,
+            'scales' => [
+                'yAxes' => [
+                    [
+                        'display' => true,
+                    ],
+                ],
+                'xAxes' => [
+                    [
+                        'gridLines' => ['display' => false],
+                        'display' => true,
+                    ],
+                ],
+            ],
+        ]);
+
         // END OF CHARTS ==============================================================================
         
         return view('admin.home', 
         compact('admininfo','users','collectibles',
         'usercount','collectiblecount','couriercount',
         'availablecollectible','soldcollectible',
-        'saleschart','collectibleStocksChart'));
+        'saleschart','collectibleStocksChart','projectedUsersChart'));
     }
 
     public function adminprofile()
