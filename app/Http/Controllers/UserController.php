@@ -66,6 +66,24 @@ class UserController extends Controller
         return redirect()->route('login.loginpage')->with('success','Account Verified, You can Login now !');
     }
 
+    public function activate($id){
+        $user = User::withTrashed()->find($id);
+        if ($user) {
+            $user->restore();
+        } 
+
+        return redirect()->route('users.index');
+    }
+
+    public function deactivate($id){
+        $user = User::find($id);
+        if ($user) {
+            $user->delete();
+        }
+
+        return redirect()->route('users.index');
+    }
+
 
     public function collectibles(Request $data){
         $user = Auth::user();
