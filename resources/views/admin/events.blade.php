@@ -37,6 +37,7 @@
                         <th scope="col" class="px-6 py-3">
                             Details
                         </th>
+
                         <th scope="col" class="px-6 py-3">
                             Discount Rate
                         </th>
@@ -50,7 +51,7 @@
                     @php
                         $imagePaths = explode(',', $event->image_path);
                     @endphp
-                    
+
                     <tr class="bg-gray-100">
                         <td class="px-6 py-4">
                             <a href="{{route('event.edit',$event->id)}}" class="text-blue-500 hover:text-blue-700 transition duration-300 ease-in-out">Update</a>
@@ -64,6 +65,7 @@
                         <td class="px-6 py-4 overflow-hidden">
                             {{ $event->details }}
                         </td>
+
                         <td class="px-6 py-4">
                             {{ $event->discount_rate }}
                         </td>
@@ -71,8 +73,8 @@
                         <td class="px-6 py-4 flex space-x-2">
                             @foreach($imagePaths as $imagePath)
                                 <img src="{{ asset($imagePath) }}" alt="event Image" style="max-width: 100px; max-height: 150px;">
-                            @endforeach      
-                        </td> 
+                            @endforeach
+                        </td>
                     </tr>
 
                     @endforeach

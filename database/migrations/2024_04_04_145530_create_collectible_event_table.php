@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('collectibles', function (Blueprint $table) {
-            $table->unsignedBigInteger('event_id')->nullable();
+        Schema::create('collectible_event', function (Blueprint $table) {
+            $table->unsignedBigInteger('event_id');
+            $table->unsignedBigInteger('collectible_id');
+            $table->double('OrigPrice');
+
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->foreign('collectible_id')->references('id')->on('collectibles')->onDelete('cascade');
         });
     }
 
@@ -22,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('collectibles', function (Blueprint $table) {
-            $table->dropColumn('event_id');
-        });
+        Schema::dropIfExists('collectible_event');
     }
 };

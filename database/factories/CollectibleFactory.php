@@ -18,7 +18,7 @@ class CollectibleFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => $this->faker->numberBetween(9, 21),
+            'user_id' => $this->faker->numberBetween(2, 11),
             'name' => $this->faker->words(rand(1, 3), true),
             'description' => $this->faker->paragraph(),
             'price' => $this->faker->numberBetween(100, 1500),

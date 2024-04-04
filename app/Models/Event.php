@@ -17,6 +17,7 @@ class Event extends Model
 
     public function collectibles()
     {
-        return $this->hasMany(Collectible::class);
+        return $this->belongsToMany(Collectible::class)
+                    ->withPivot('OrigPrice');
     }
 }

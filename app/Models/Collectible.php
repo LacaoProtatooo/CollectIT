@@ -41,7 +41,7 @@ class Collectible extends Model
 
     public function events()
     {
-        return $this->belongsTo(Event::class);
+        return $this->belongsToMany(Event::class);
     }
 
     public function carts()
