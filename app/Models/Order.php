@@ -18,14 +18,14 @@ class Order extends Model
         return $this->belongsToMany(Collectible::class);
     }
 
-    public function users()
+    public function user()
     {
-        return $this->BelongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function couriers()
+    public function courier()
     {
-        return $this->hasOne(Courier::class);
+        return $this->belongsTo(Courier::class, 'courier_id');
     }
 
     public function reviews()

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Cart\Collectible;
 use App\Models\Order;
+use App\Models\User;
 use App\Models\Courier;
 use Illuminate\Http\Request;
 use App\Mail\TransacComplete;
