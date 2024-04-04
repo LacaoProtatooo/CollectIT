@@ -27,10 +27,11 @@ class OrderController extends Controller
         $orderID = $request->id;
         $order = Order::find($orderID);
         // dd($request->id);
-        $courier = Courier::where('id', $orderID)->first();
+        $courier = Courier::where('id', $order->courier_id)->first();
         if ($order) {
             $collectibles = $order->collectibles()->withPivot('quantity', 'status')->orderBy('id', 'desc')->paginate(10);
         }
+        // dd($courier);
 
 
 

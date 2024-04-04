@@ -43,8 +43,8 @@ Route::post('/register/user', [LoginController::class, 'signupuser'])->name('sig
 Route::get('/account/verify/{email}', [UserController::class, 'verifyemail'])->name('account.verify');
 
 // USER AND ADMIN
-Route::post('/user/update', [UserController::class, 'profileupdate'])->middleware('admin', 'user')->name('user.update');
-Route::get('/user/{id}/delete', [UserController::class, 'delete'])->middleware('admin', 'user')->name('user.delete');
+Route::post('/user/update', [UserController::class, 'profileupdate'])->name('user.update');
+Route::get('/user/{id}/delete', [UserController::class, 'delete'])->name('user.delete');
 
 // ADMIN =======================================================================
 Route::prefix('admin')->middleware('admin')->group(function () {
