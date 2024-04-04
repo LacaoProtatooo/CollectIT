@@ -10,7 +10,7 @@
             </a>
             <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-info sm:mb-0 dark:text-gray-400">
                 <li>
-                    <a href="" class="hover:underline me-4 md:me-6">About</a>
+                    <a href="{{ route('welcome') }}" class="hover:underline me-4 md:me-6">About</a>
                 </li>
                 <li>
                     <a href="" class="hover:underline me-4 md:me-6">Privacy Policy</a>
