@@ -40,7 +40,7 @@ class CartController extends Controller
                         $cart->collectibles()->updateExistingPivot($request->id, ['quantity' => $newQuantity]);
                     }else{
                         $collectible = Collectible::find($request->id);
-                        $cart->collectibles()->attach($collectible->id, ['quantity' => $request->quantity]);
+                        $cart->collectibles()->attach($collectible->id, ['quantity' => $request->quantity, 'Status'=>'null']);
                     }
                 }
 

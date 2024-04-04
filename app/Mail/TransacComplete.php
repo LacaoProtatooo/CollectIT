@@ -8,34 +8,40 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-
+use App\Models\Order;
 class TransacComplete extends Mailable
 {
     use Queueable, SerializesModels;
     public $user;
+    public $orders;
     /**
      * Create a new message instance.
      */
-    public function __construct($user)
+    public function __construct($user, $orders)
     {
         $this->user = $user;
+        $this->orders = $orders;
     }
-    public function envelope(): Envelope
+    public function build()
     {
-        return new Envelope(
-            subject: 'Thank You For Purchasing!!!',
-        );
-    }
+        // Fetch orders with their associated user, courier, and collectibles
+        $orders = Order::with('user', 'courier', 'collectibles')->get();
 
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            view: 'email.success',
-            with: ['user' => $this->user]
-        );
+        // Initialize an empty array to store user data for each order
+        $userData = [];
+
+        // Iterate over each order to extract user data
+        foreach ($orders as $order) {
+            // Extract user data from the current order
+            $userData[] = [
+                'user' => $order->user,
+                'order' => $order,
+                // Add other necessary data if needed
+            ];
+        }
+
+        return $this->subject('Thank You For Purchasing!!!')
+                    ->view('email.success', ['userData' => $userData]);
     }
 
     /**
@@ -43,8 +49,5 @@ class TransacComplete extends Mailable
      *
      * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
-    public function attachments(): array
-    {
-        return [];
-    }
+
 }

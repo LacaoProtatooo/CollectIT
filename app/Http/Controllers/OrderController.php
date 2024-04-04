@@ -34,7 +34,7 @@ class OrderController extends Controller
         }
         // dd($courier);
 
-        
+
 
        return view('user.orderSummary', compact('collectibles', 'order','courier'));
     }
@@ -84,7 +84,8 @@ class OrderController extends Controller
                 }
             }
             $user = Auth::user();
-            Mail::to($user->email)->send(new TransacComplete($user));
+            $orders = Order::with('user', 'courier', 'collectibles')->get();
+            Mail::to($user->email)->send(new TransacComplete($orders, $user));
 
 
         $cart = Cart::destroy($cartID);

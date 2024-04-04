@@ -15,7 +15,7 @@ class Order extends Model
     ];
     public function collectibles()
     {
-        return $this->belongsToMany(Collectible::class);
+        return $this->belongsToMany(Collectible::class)->withPivot('quantity');
     }
 
     public function user()
