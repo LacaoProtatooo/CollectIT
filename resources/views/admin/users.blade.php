@@ -20,7 +20,9 @@
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 bg-indigo-500">
                 <thead class="text-xs text-white uppercase dark:bg-gray-700 dark:text-gray-400 bg-indigo-500">
                     <tr>
-
+                        <th scope="col" class="px-6 py-3">
+                            Activation
+                        </th>
                         <th scope="col" class="px-6 py-3">
                             ID
                         </th>
@@ -54,6 +56,21 @@
                     @endphp
 
                     <tr class="bg-gray-100">
+                        
+                            @php
+                                // dd($user->deleted_at);
+                            @endphp
+                            @if(isset($user->deleted_at) && $user->deleted_at != NULL)
+                            <td class="px-6 py-4">
+                                <a href="{{ route('user.activate', ['id' => $user->id]) }}" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Deactivated: Activate</a>
+                            </td>
+                            @else
+                            {{-- <td>
+                                <a href="{{ route('user.deactivate', ['id' => $user->id]) }}" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Activated: Deactivate</a>
+                            </td> --}}
+                            @endif
+                            
+                     
 
                         <td class="px-6 py-4">
                             {{ $user->id }}

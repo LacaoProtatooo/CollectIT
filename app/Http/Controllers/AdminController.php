@@ -144,7 +144,7 @@ class AdminController extends Controller
     // Collectible Details for sold
     public function details($id){
         $collectibleinfo = Collectible::find($id);
-        $sellerinfo = User::where('id', $collectibleinfo->id)->first();
+        $sellerinfo = User::where('id', $collectibleinfo->user_id)->first();
 
         $customerinfo = Order::leftJoin('carts', 'orders.user_id', '=', 'carts.user_id')
         ->leftJoin('users', 'carts.user_id', '=', 'users.id')

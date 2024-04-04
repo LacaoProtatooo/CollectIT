@@ -52,6 +52,10 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/{collectibleid}/collectible-details', [Admincontroller::class, 'details'])->name('admin.collectibledetails');
 
     Route::get('/admprofile', [Admincontroller::class, 'adminprofile'])->name('admin.profile');
+    // User Activate
+    Route::get('/user/{id}/activate', [UserController::class, 'activate'])->name('user.activate');
+    Route::get('/user/{id}/deactivate', [UserController::class, 'deactivate'])->name('user.deactivate');
+
 
 
     // Events
