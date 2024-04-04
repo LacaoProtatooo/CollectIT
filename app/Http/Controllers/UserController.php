@@ -160,7 +160,9 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::all();
+        $activeUsers = User::all();
+        $softDeletedUsers = User::withTrashed()->get();
+        $users = $activeUsers->merge($softDeletedUsers);
         return view('admin.users', compact('users'));
     }
 

@@ -21,12 +21,12 @@ class UserMiddleware
         if(Auth()->User()->role == 'user') {
             return $next($request);
         }
-        else { // Modify Later, pangit auto logout haha
-            Auth::logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
+        else {
+            // Auth::logout();
+            // $request->session()->invalidate();
+            // $request->session()->regenerateToken();
 
-            return redirect()->back();
+            return redirect()->back()->with('error','User not Authorized');
         }
     }
 }

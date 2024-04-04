@@ -22,11 +22,11 @@ class AdminMiddleware
             return $next($request);
         }
         else { // Modify Later, pangit auto logout haha
-            Auth::logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
+            // Auth::logout();
+            // $request->session()->invalidate();
+            // $request->session()->regenerateToken();
 
-            return redirect()->back();
+            return redirect()->back()->with('error','User not Authorized');
         }
 
     }
