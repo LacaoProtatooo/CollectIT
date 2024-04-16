@@ -67,7 +67,7 @@
           </p>
         </div>
         <div class="w-full" id="week-signups-chart"></div>
-      </div>     
+      </div>
       <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
         <div class="w-full">
           <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Users</h3>
@@ -122,13 +122,13 @@
             <div class="bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800">
                 <div class="p-4 sm:p-6">
                     {!! $saleschart->container() !!}
-                    {!! $saleschart->script() !!} 
+                    {!! $saleschart->script() !!}
                 </div>
             </div>
             <div class="bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800">
                 <div class="p-4 sm:p-6">
                     {!! $collectibleStocksChart->container() !!}
-                    {!! $collectibleStocksChart->script() !!} 
+                    {!! $collectibleStocksChart->script() !!}
                 </div>
             </div>
             <div class="bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800">
@@ -139,7 +139,7 @@
         </div>
     </div>
 
-   
+
     <br>
     <!-- COLLECTIBLES -->
     <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
@@ -185,7 +185,7 @@
                         Status
                     </th>
                     <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                      
+
                     </th>
                   </tr>
                 </thead>
@@ -217,7 +217,7 @@
                         @if ($collectible->status == 'sold')
                             <td>
                                 <button type="button" onclick="window.location.href='{{ route('admin.collectibledetails', ['collectibleid' => $collectible->id]) }}'" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-0">Details</button>
-                            </td>  
+                            </td>
                         @endif
                       </tr>
 

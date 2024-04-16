@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,85 +8,69 @@
 </head>
 <body class="">
     @include('common.header')
-
-    <div class="max-w-screen-xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mx-auto p-4 mt-4 mb-4">
-        <div class="overflow-x-auto">
-        </div>
-    </div>
     @php
     $overTotal = 0;
- @endphp
+    @endphp
+    <div class="flex justify-center">
+        <h2 class="card-title">Summary</h2>
+    </div>
 
-    <h2 class="card-title">Summary</h2>
-    @foreach ($collectibles as $collectible)
-    <div class="hero min-h-screen bg-base-200">
+    <div class="flex justify-center min-h-screen bg-base-200">
+        <div class="max-w-screen-xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-2 p-4 mt-4  mx-auto">
+            @foreach ($collectibles as $collectible)
+            <div class="card-body">
+                <label class="form-control w-full max-w-xs">
+                    {{-- ==================CARDDD==================== --}}
+                    <div class="bg bg-cyan-800 rounded-lg w-400 grid grid-cols-2 gap-4">
+                        <div class="col-span-2 bg bg-cyan-950 rounded-lg ">
+                            <div class="flex justify-center  ml-4 mt-2 mb-2 child-with-space">Product: {{$collectible->name}}</div>
+                        </div>
+                        <div class="bg bg-cyan-950 rounded-lg grid grid-cols-1 gap-4 m-1">
+                            <div class="ml-4 mt-2 mb-2">Manufacturer: {{$collectible->manufacturer}}</div>
+                        </div>
+                        <div class="bg bg-cyan-950 rounded-lg grid grid-cols-1 gap-4 m-1">
+                            <div class="ml-4 mt-2 mb-2">Price: {{$collectible->price}}</div>
+                        </div>
+                        <div class="bg bg-cyan-950 rounded-lg grid grid-cols-1 gap-4 m-1">
+                            <div class="ml-4 mt-2 mb-2">Dimension: {{$collectible->dimension}}</div>
+                        </div>
+                        <div class="bg bg-cyan-950 rounded-lg grid grid-cols-1 gap-4 m-1">
+                            <div class="ml-4 mt-2 mb-2">Quantity: {{$collectible->pivot->quantity}}</div>
+                        </div>
+                        @php
+                            $totalPrice = $collectible->price * $collectible->pivot->quantity;
+                            $overTotal += $totalPrice;
+                        @endphp
+                        <div class="col-span-2 bg bg-cyan-950 rounded-lg grid grid-cols-1 gap-4 m-1">
+                            <div class="flex justify-center ml-4 mt-2 mb-2">Sub Total: {{$totalPrice}}</div>
+                        </div>
 
-        <div class="card-body">
-            <label class="form-control w-full max-w-xs">
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="label">
-                        <span class="label-text">Product Name</span>
-                    </div>
-                    <input type="text" value="{{$collectible->name}}" class="input input-bordered w-full max-w-xs bg-white text-black " readonly />
+                        @if($collectible->pivot->reviewStat == 'toRate')
+                            <h3 class="col-span-2 font-bold text-lg">Your Review</h3>
+                            <form method="POST"class = "col-span-2" action="{{ route('review.create') }}">
+                                @csrf
+                                <input type="hidden" name="colID" value="{{ $collectible->id }}">
+                                <input type="hidden" name="ordID" value="{{ $order->id }}">
+                                <div class="col-span-2  form-control">
+                                    <!-- Your Review textarea -->
+                                    <textarea name="review" class="textarea textarea-bordered h-24 bg-white text-black" placeholder="Write your review here"></textarea>
+                                </div>
+                                <div class="col-span-2 card-actions justify-end">
+                                    <button type="submit" class="btn w-full content-center bg-green-500 text-white">Publish</button>
+                                </div>
+                        </form>
 
-                    <div class="label">
-                        <span class="label-text">Manufacturer</span>
-                    </div>
-                    <input type="text" value="{{$collectible->manufacturer}}" class="input input-bordered w-full max-w-xs bg-white text-black" readonly />
+                        @elseif($collectible->pivot->reviewStat == 'rated')
+                        <h3 class="font-bold text-lg">Reviewed</h3>
+                        @endif
 
-                    <div class="label">
-                        <span class="label-text">Dimension</span>
                     </div>
-                    <input type="text" value="{{$collectible->dimension}}" class="input input-bordered w-full max-w-xs bg-white text-black" readonly />
-
-                    <div class="label">
-                        <span class="label-text">Price</span>
-                    </div>
-                    <input type="text" value="{{$collectible->price}}" class="input input-bordered w-full max-w-xs bg-white text-black" readonly />
-
-                    <div class="label">
-                        <span class="label-text">Quantity</span>
-                    </div>
-                    <input type="text" value="{{$collectible->pivot->quantity}}" class="input input-bordered w-full max-w-xs bg-white text-black" readonly />
-
-                    <div class="label">
-                        <span class="label-text">Sub Total</span>
-                    </div>
-                    @php
-                        $totalPrice = $collectible->price * $collectible->pivot->quantity;
-                        $overTotal += $totalPrice;
-                    @endphp
-                    <input type="text" value="{{$totalPrice}}" class="input input-bordered w-full max-w-xs bg-white text-black" readonly />
-                </div>
-            </label>
-         
-            @if($collectible->pivot->reviewStat == 'toRate')
-                <h3 class="font-bold text-lg">Your Review</h3>
-                <form method="POST" action="{{ route('review.create') }}">
-                    @csrf
-                    <input type="hidden" name="colID" value="{{ $collectible->id }}">
-                    <input type="hidden" name="ordID" value="{{ $order->id }}">
-                    <label class="form-control">
-                        <!-- Your Review textarea -->
-                        <textarea name="review" class="textarea textarea-bordered h-24 bg-white text-black" placeholder="Write your review here"></textarea>
-                    </label>
-                    <div class="card-actions justify-end">
-                        <button type="submit" class="btn w-full content-center bg-green-500 text-white">Publish</button>
-                    </div>
-                </form>
-                </label>
-            @elseif($collectible->pivot->reviewStat == 'rated')
-                <h3 class="font-bold text-lg">Reviewed</h3>
-            @endif
+                          {{-- ==================CARDDD==================== --}}
 
 
             </div>
+            @endforeach
         </div>
-
-
-
-    </div>
-    @endforeach
     </div>
 
     <div class="flex justify-center">
@@ -109,6 +92,5 @@
         </div>
     </div>
     @include('common.footer')
-</div>
 </body>
 </html>
