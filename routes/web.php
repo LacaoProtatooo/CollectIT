@@ -57,7 +57,14 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/user/{id}/activate', [UserController::class, 'activate'])->name('user.activate');
     Route::get('/user/{id}/deactivate', [UserController::class, 'deactivate'])->name('user.deactivate');
 
-
+    // Collectibles CRUD
+    Route::get('/collectibles', [AdminController::class, 'collectibles'])->name('admin.collectibles.show');
+    Route::get('/collectible/create', [AdminController::class, 'collectibleCreate'])->name('admin.collectible.create');
+    Route::post('/collectible/store', [AdminController::class, 'collectibleStore'])->name('admin.collectible.store');
+    Route::get('/collectible/{id}/edit', [AdminController::class, 'collectibleEdit'])->name('admin.collectible.edit');
+    Route::post('/collectible/{id}/update', [AdminController::class, 'collectibleUpdate'])->name('admin.collectible.update');
+    Route::get('/collectible/{id}/delete', [AdminController::class, 'collectibleDelete'])->name('admin.collectible.delete');
+    Route::get('/collectible/{id}/restore', [AdminController::class, 'collectibleRestore'])->name('admin.collectible.restore');
 
     // Events
     Route::get('/event', [EventController::class, 'events'])->name('event.show');

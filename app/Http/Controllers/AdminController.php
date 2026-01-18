@@ -192,5 +192,129 @@ class AdminController extends Controller
         return view('admin.collectibledetails', compact('customerinfo','sellerinfo','collectibleinfo')); 
     }
 
+    // ==================== COLLECTIBLES CRUD ====================
 
+    public function collectibles()
+    {
+        $collectibles = Collectible::withTrashed()->with('users')->get();
+        return view('admin.collectibles', compact('collectibles'));
+    }
+
+    public function collectibleCreate()
+    {
+        return view('admin.collectibles.create');
+    }
+
+    public function collectibleStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'dimension' => 'required',
+            'condition' => 'required',
+            'stock' => 'required|integer',
+            'manufacturer' => 'required',
+            'category' => 'required',
+            'release_date' => 'required|date',
+            'status' => 'required',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif'
+        ]);
+
+        // Image Handler
+        $imagePaths = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $filename = uniqid() . '_' . $image->getClientOriginalName();
+                $image->move('storage', $filename);
+                $imagePaths[] = 'storage/' . $filename;
+            }
+        }
+
+        Collectible::create([
+            'user_id' => Auth::id(),
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'dimension' => $request->dimension,
+            'condition' => $request->condition,
+            'stock' => $request->stock,
+            'manufacturer' => $request->manufacturer,
+            'category' => $request->category,
+            'status' => $request->status,
+            'release_date' => $request->release_date,
+            'image_path' => !empty($imagePaths) ? implode(',', $imagePaths) : null,
+        ]);
+
+        return redirect()->route('admin.collectibles.show')->with('success', 'Collectible created successfully!');
+    }
+
+    public function collectibleEdit($id)
+    {
+        $collectible = Collectible::findOrFail($id);
+        return view('admin.collectibles.edit', compact('collectible'));
+    }
+
+    public function collectibleUpdate(Request $request, $id)
+    {
+        $collectible = Collectible::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'dimension' => 'required',
+            'condition' => 'required',
+            'stock' => 'required|integer',
+            'manufacturer' => 'required',
+            'category' => 'required',
+            'release_date' => 'required|date',
+            'status' => 'required',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif'
+        ]);
+
+        $data = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'dimension' => $request->dimension,
+            'condition' => $request->condition,
+            'stock' => $request->stock,
+            'manufacturer' => $request->manufacturer,
+            'category' => $request->category,
+            'status' => $request->status,
+            'release_date' => $request->release_date,
+        ];
+
+        // Image Handler - only update if new images are uploaded
+        if ($request->hasFile('images')) {
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $filename = uniqid() . '_' . $image->getClientOriginalName();
+                $image->move('storage', $filename);
+                $imagePaths[] = 'storage/' . $filename;
+            }
+            $data['image_path'] = implode(',', $imagePaths);
+        }
+
+        $collectible->update($data);
+
+        return redirect()->route('admin.collectibles.show')->with('success', 'Collectible updated successfully!');
+    }
+
+    public function collectibleDelete($id)
+    {
+        $collectible = Collectible::findOrFail($id);
+        $collectible->delete();
+
+        return redirect()->route('admin.collectibles.show')->with('success', 'Collectible deleted successfully!');
+    }
+
+    public function collectibleRestore($id)
+    {
+        $collectible = Collectible::withTrashed()->findOrFail($id);
+        $collectible->restore();
+
+        return redirect()->route('admin.collectibles.show')->with('success', 'Collectible restored successfully!');
+    }
 }

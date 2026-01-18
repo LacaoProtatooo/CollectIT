@@ -8,6 +8,9 @@
         <a href="{{ route('users.index') }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-7 py-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
             Users
         </a>
+        <a href="{{ route('admin.collectibles.show') }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-7 py-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+            Collectibles
+        </a>
         <a href="{{ route('order.show') }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-7 py-4 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
             Orders
         </a>
