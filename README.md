@@ -1,7 +1,7 @@
 # 🎯 Collect-IT
 
 <p align="center">
-  <img src="public/storage/gundam.png" alt="Collect-IT Logo" width="150">
+  <img src="readme_pics/gundam.png" alt="Collect-IT Logo" width="150">
 </p>
 
 <p align="center">
